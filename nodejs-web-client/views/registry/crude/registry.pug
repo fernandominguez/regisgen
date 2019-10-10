@@ -1,0 +1,228 @@
+div.modal-content.panel.panel-danger(style="scroll: auto;")
+  div.modal-header
+    div.panel-title
+      span(ng-if="isNew")
+        | Nueva Anotación
+      span(ng-if="!isNew")
+        | Datos de la Anotación
+      a.close.btn.btn-small.btn-outline-primary(type="button" aria-label="Close" data-dismiss="modal")
+        span(aria-hidden="true")
+          | &times;
+  div.modal-body.print-form
+    form.form-horizontal.col-xs-12.col-sm-12.col-md-offset-1.col-xs-offset-1(name="noteForm" novalidate="novalidate")
+      div.form-group(ng-if="!isNew || isCreated")
+        div.col-sm-12.text-center.justify-content-center
+          div.registry-stamp.print-stamp
+            div.registry-col1
+              div.registry-logo
+                img(src="./themes/default/img/logo.jpg")
+            div.registry-col2
+              div.registry-title
+                | Libro de Registro
+              div.registry-subtitle
+                | General
+              div.registry-type.externa(ng-if="note.type == 'e' && note.subtype == 'e'")
+                | ENTRADA
+              div.registry-type.interna(ng-if="note.type == 'e' && note.subtype == 'i'")
+                | ENTRADA - Interna
+              div.registry-type.externa(ng-if="note.type == 's' && note.subtype == 'e'")
+                | SALIDA
+              div.registry-type.interna(ng-if="note.type == 's' && note.subtype == 'i'")
+                | SALIDA - Interna
+              div.registry-number
+                span.registry-label
+                  | N.R.
+                span
+                  | {{ note.number }}
+              div.registry-date
+                span.registry-label
+                  | Fecha:
+                span
+                  | {{ note.dateFormat }}
+      div.form-group(ng-if="(!isNew || isCreated) && (note.type == 'e' && note.subtype == 'e')")
+        div.col-sm-12
+          label.text-nowrap(for="inputExOr")
+            | Tercero de Origen
+          input#inputExOr.form-control(name="exor" type="text" ng-model="note.originThirdpartyName", disabled)
+      div.form-group(ng-if="(!isNew || isCreated) && ((note.type == 's' && note.subtype == 'e') || note.subtype == 'i')")
+        div.col-sm-12
+          label.text-nowrap(for="inputInOr")
+            | Departamento de Origen
+          input#inputInOr.form-control(name="inor" type="text" ng-model="note.originDepartmentName", disabled)
+      div.form-group(ng-if="(!isNew || isCreated) && (note.type == 's' && note.subtype == 'e')")
+        div.col-sm-12
+          label.text-nowrap(for="inputExDe")
+            | Tercero Destinatario
+          input#inputExDe.form-control(name="exde" type="text" ng-model="note.destinyThirdpartyName", disabled)
+      div.form-group(ng-if="(!isNew || isCreated) && ((note.type == 'e' && note.subtype == 'e') || note.subtype == 'i')")
+        div.col-sm-12
+          label.text-nowrap(for="inputInDe")
+            | Departamento Destinatario
+          input#inputInDe.form-control(name="inde" type="text" ng-model="note.destinyDepartmentName", disabled)
+      div.form-group.print-hide(ng-if="isNew && !isCreated")
+        div.col-sm-6.text-center(ng-class="{ 'has-error': (!isNew && noteForm.type.$invalid) || (isNew && noteForm.type.$invalid && noteForm.type.$dirty) }")
+          label.text-nowrap(for="inputType")
+            | Tipo
+          div#inputType.col-sm-12.text-center.form-radio-group
+            div.abc-radio.abc-radio-info.form-check-inline
+              input(name="type" type="radio" ng-model="note.type", required, ng-disabled="isView" value="e")
+              label
+                | Entrada
+            div.abc-radio.abc-radio-info.form-check-inline
+              input(name="type" type="radio" ng-model="note.type", required, ng-disabled="isView" value="s")
+              label
+                | Salida
+          div.help-block(ng-messages="noteForm.type.$error" ng-if="(!isNew && noteForm.type.$invalid) || (isNew && noteForm.type.$invalid && noteForm.type.$dirty)")
+            include ../../messages.pug
+        div.col-sm-6.text-center(ng-class="{ 'has-error': (!isNew && noteForm.subtype.$invalid) || (isNew && noteForm.subtype.$invalid && noteForm.subtype.$dirty) }")
+          label.text-nowrap(for="inputSubtype")
+            | Subtipo
+          div#inputSubtype.col-sm-12.text-center.form-radio-group
+            div.abc-radio.abc-radio-info.form-check-inline
+              input(name="subtype" type="radio" ng-model="note.subtype", required, ng-disabled="isView" value="i")
+              label
+                | Interna
+            div.abc-radio.abc-radio-info.form-check-inline
+              input(name="subtype" type="radio" ng-model="note.subtype", required, ng-disabled="isView" value="e")
+              label
+                | Externa
+          div.help-block(ng-messages="noteForm.subtype.$error" ng-if="(!isNew && noteForm.subtype.$invalid) || (isNew && noteForm.subtype.$invalid && noteForm.subtype.$dirty)")
+            include ../../messages.pug
+      div.form-group.print-hide(ng-if="isNew")
+        div#origin.col-sm-6(ng-class="{ 'has-error': (!isNew && noteForm.origin.$invalid) || (isNew && noteForm.origin.$invalid && noteForm.origin.$dirty) }")
+          div#exor.col-sm-12.text-center(ng-show="noteForm.type.$viewValue == 'e' && noteForm.subtype.$viewValue == 'e'")
+            label.text-nowrap(for="selectExOr" style="width: 100%;")
+              | Tercero de Origen
+              div(style="float: left; position: relative; width: 100%;")
+                div(style="float: left; position: relative; width: 50px; top: 0.4em;")
+                  a.btn.btn-small.btn-warning(ng-click="newThirdparty()" data-toggle="modal" title="Nuevo Tercero" data-target="#thirdpartyModal" style="width: 40px; min-width: 40px; max-width: 40px;")
+                    span.fa.fa-plus
+                div(style="float:left; position:relative;")
+                  select#selectExOr.selectpicker.form-control(name="exor" ng-model="note.exor", multiple, data-max-options="1" ng-disabled="isView" data-none-selected-text="Selecciona Origen ..." data-live-search="true" data-size="10")
+          div#inor.col-sm-12.text-center(ng-show="(noteForm.type.$viewValue == 's' && noteForm.subtype.$viewValue == 'e') || ((noteForm.type.$viewValue == 'e' || noteForm.type.$viewValue == 's') && noteForm.subtype.$viewValue == 'i')")
+            label.text-nowrap(for="selectInOr" style="width: 100%;")
+              | Departamento de Origen
+              div(style="float: left; position: relative; width: 100%;")
+                div(style="float: left; position: relative; width: 50px; top: 0.4em;")
+                  a.btn.btn-small.btn-warning(ng-click="newDepartment()" data-toggle="modal" title="Nuevo Departamento" data-target="#departmentModal" style="width: 40px; min-width: 40px; max-width: 40px;")
+                    span.fa.fa-plus
+                div(style="float:left; position:relative;")
+                  select#selectInOr.selectpicker.form-control(name="inor" ng-model="note.inor", multiple, data-max-options="1" ng-disabled="isView" data-none-selected-text="Selecciona Origen ..." data-live-search="true" data-size="10")
+          div.help-block(ng-messages="noteForm.origin.$error" ng-if="(!isNew && noteForm.origin.$invalid) || (isNew && noteForm.origin.$invalid && noteForm.origin.$dirty)")
+            include ../../messages.pug
+        div#destiny.col-sm-6(ng-class="{ 'has-error': (!isNew && noteForm.destiny.$invalid) || (isNew && noteForm.destiny.$invalid && noteForm.destiny.$dirty) }")
+          div#exde.col-sm-12.text-center(ng-show="noteForm.type.$viewValue == 's' && noteForm.subtype.$viewValue == 'e'")
+            label.text-nowrap(for="selectExDe" style="width: 100%;")
+              | Tercero Destinatario
+              div(style="float: left; position: relative; width: 100%;")
+                div(style="float: left; position: relative; width: 50px; top: 0.4em;")
+                  a.btn.btn-small.btn-warning(ng-click="newThirdparty()" data-toggle="modal" title="Nuevo Tercero" data-target="#thirdpartyModal" style="width: 40px; min-width: 40px; max-width: 40px;")
+                    span.fa.fa-plus
+                div(style="float:left; position:relative;")
+                  select#selectExDe.selectpicker.form-control(name="exde" ng-model="note.exde", multiple, data-max-options="1" ng-disabled="isView" data-none-selected-text="Selecciona Destinatario ..." data-live-search="true" data-size="10")
+          div#inde.col-sm-12.text-center(ng-show="(noteForm.type.$viewValue == 'e' && noteForm.subtype.$viewValue == 'e') || ((noteForm.type.$viewValue == 'e' || noteForm.type.$viewValue == 's') && noteForm.subtype.$viewValue == 'i')")
+            label.text-nowrap(for="selectInDe" style="width: 100%;")
+              | Departamento Destinatario
+              div(style="float: left; position: relative; width: 100%;")
+                div(style="float: left; position: relative; width: 50px; top: 0.4em;")
+                  a.btn.btn-small.btn-warning(ng-click="newDepartment()" data-toggle="modal" title="Nuevo Departamento" data-target="#departmentModal" style="width: 40px; min-width: 40px; max-width: 40px;")
+                    span.fa.fa-plus
+                div(style="float:left; position:relative;")
+                  select#selectInDe.selectpicker.form-control(name="inde" ng-model="note.inde", multiple, data-max-options="1" ng-disabled="isView" data-none-selected-text="Selecciona Destinatario ..." data-live-search="true" data-size="10")
+          div.help-block(ng-messages="noteForm.destiny.$error" ng-if="(!isNew && noteForm.destiny.$invalid) || (isNew && noteForm.destiny.$invalid && noteForm.destiny.$dirty)")
+            include ../../messages.pug
+      div.form-group
+        div.col-sm-12(ng-class="{ 'has-error': noteForm.title.$invalid && noteForm.title.$dirty }")
+          label.text-nowrap(for="inputTitle")
+            | Título
+          input#inputTitle.form-control(name="title" type="text" ng-model="note.title", required, ng-disabled="isView || isCreated" ng-maxlength="255" ng-minlength="10")
+          div.help-block(ng-messages="noteForm.title.$error" ng-if="noteForm.title.$invalid && noteForm.title.$dirty")
+            include ../../messages.pug
+      div.form-group
+        div.col-sm-12(ng-class="{ 'has-error': (!isNew && noteForm.content.$invalid) || (isNew && noteForm.content.$invalid && noteForm.content.$dirty) }")
+          label.text-nowrap(for="inputContent")
+            | Contenido
+          textarea#inputContent.form-control(name="content" type="text" ng-model="note.content" ng-disabled="isView || isCreated" rows="5" ng-minlength="10" ng-maxlength="2000")
+          div.help-block(ng-messages="noteForm.content.$error" ng-if="(!isNew && noteForm.content.$invalid) || (isNew && noteForm.content.$invalid && noteForm.content.$dirty)")
+            include ../../messages.pug
+      div.form-group(ng-if="isNew || (tmpFiles.length > 0)")
+        div.col-sm-12
+          label.text-nowrap(for="inputFile")
+            | Documento(s)
+          ul
+            li.files(ng-repeat="file in tmpFiles")
+              span(ng-click="downloadFile(file, note.id)", style="cursor: pointer;", title="Descargar Documento")
+                span.fa.fa-file
+                | - {{file.name}}
+              span.files-desc
+                |  - ({{file.size}} bytes)
+              span.files-desc
+                |  - hash: {{file.checksum}}
+              |  {{file.$errorParam}}
+              span.progress(ng-if="file.progress >= 0 && file.progress < 100")
+                div(style="width: {{file.progress}}%" ng-bind="file.progress + '%'")
+              span.fa.fa-check(ng-if="file.progress == 100")
+            li.files-error(ng-repeat="errFile in errFiles")
+              span.fa.fa-file
+              | - {{errFile.name}}
+              span.strong
+                |  [Tipo de archivo no permitido]
+          div.drop-box.print-hide(ngf-select="uploadFiles($files, $invalidFiles)" ngf-drop="uploadFiles($files, $invalidFiles)" multiple ngf-pattern="'application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document'" ng-disabled="isView || isCreated" ngf-drag-over-class="{pattern: 'application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document', accept:'drop-box-accept', reject:'drop-box-reject', delay:100}" ngf-validate="{size: {min: 10, max: '20MB'}}" ngf-keep="keepDistinct ? 'distinct' : keep" ngf-max-files="10" ngf-drop-available="dropAvailable" ng-if="isNew")
+            | Selecciona
+            span(ng-show="dropAvailable")
+              |  o Arrastra
+            |  los Archivos
+      div.form-group.print-hide
+        div.col-sm-4.text-center(ng-class="{ 'has-error': (!isNew && noteForm.channel.$invalid) || (isNew && noteForm.channel.$invalid && noteForm.channel.$dirty) }")
+          label.text-nowrap(for="selectChannel")
+            | Canal de Transmisión
+          select#selectChannel.selectpicker.form-control(name="channel" ng-model="note.channel" multiple data-max-options="1" ng-disabled="isView || isCreated" data-width="100%" data-none-selected-text="Nada Seleccionado")
+          div.help-block(ng-messages="noteForm.channel.$error" ng-if="(!isNew && noteForm.channel.$invalid) || (isNew && noteForm.channel.$invalid && noteForm.channel.$dirty)")
+            include ../../messages.pug
+        div.col-sm-4.text-center(ng-class="{ 'has-error': (!isNew && noteForm.tag.$invalid) || (isNew && noteForm.tag.$invalid && noteForm.tag.$dirty) }")
+          label.text-nowrap(for="selectTag")
+            | Etiqueta
+          select#selectTag.selectpicker.form-control(name="tag" ng-model="note.tag" multiple data-max-options="1" ng-disabled="isView || isCreated" data-width="100%" data-none-selected-text="Nada Seleccionado")
+          div.help-block(ng-messages="noteForm.tag.$error" ng-if="(!isNew && noteForm.tag.$invalid) || (isNew && noteForm.tag.$invalid && noteForm.tag.$dirty)")
+            include ../../messages.pug
+        div.col-sm-4.text-center(ng-class="{ 'has-error': (!isNew && noteForm.state.$invalid) || (isNew && noteForm.state.$invalid && noteForm.state.$dirty) }")
+          label.text-nowrap(for="selectState")
+            | Estado
+          select#selectState.selectpicker.form-control(name="state" ng-model="note.state" multiple data-max-options="1" ng-disabled="isView || isCreated" data-width="100%" data-none-selected-text="Nada Seleccionado")
+          div.help-block(ng-messages="noteForm.state.$error" ng-if="(!isNew && noteForm.state.$invalid) || (isNew && noteForm.state.$invalid && noteForm.state.$dirty)")
+            include ../../messages.pug
+      div.row.justify-content-center(ng-if="saving || flashMessage")
+        div.col-md-10
+          div.alert.alert-success.text-center(ng-if="saving")
+            span.fa.fa-hourglass
+            |  {{saving}}
+          div.alert.alert-danger.text-center(ng-if="flashMessage")
+            |  {{flashMessage}}
+  div.modal-footer.print-form
+    div.form-group.print-hide
+      div.col-sm-10.buttons
+        a.btn.btn-small.btn-outline-primary(role="button" data-dismiss="modal")
+          span.fa.fa-triangle-left
+          |  Volver
+        span(ng-if="isView")
+          a.btn.btn-small.btn-primary(print-div=".print-form" print-div-type="form")
+            span.fa.fa-print
+            |  Imprimir
+        span(ng-if="isView")
+          a.btn.btn-small.btn-primary(print-div=".print-stamp" print-div-type="div")
+            span.fa.fa-print
+            |  Imprimir Sello
+        span(ng-if="!isView && !isNew")
+          a.btn.btn-small.btn-primary(ng-click="updateNote(noteForm.$valid)" ng-disabled="noteForm.$invalid" ng-if="menuCrude.indexOf('u')>=0")
+            span.fa.fa-save
+            |  Guardar
+        span(ng-if="(!isView && (isNew && !isCreated))")
+          a.btn.btn-small.btn-primary(ng-click="addNote(noteForm.$valid)" ng-disabled="noteForm.$invalid" ng-if="menuCrude.indexOf('c')>=0")
+            span.fa.fa-save
+            |  Añadir
+  div#thirdpartyModal.modal.fade.in.col-xs-12.col-sm-6.col-md-6.col-md-offset-.col-xs-offset-4.col-xs-offset-1(role="dialog")
+    div.modal-dialog.modal-lg
+      include ../crude/thirdparties
+  div#departmentModal.modal.fade.in.col-xs-12.col-sm-6.col-md-6.col-md-offset-3.col-xs-offset-4.col-xs-offset-1(role="dialog")
+    div.modal-dialog.modal-lg
+      include ../crude/departments

@@ -1,0 +1,105 @@
+div.modal-content.panel.panel-danger
+  div.modal-header
+    div.panel-title
+      span(ng-if="isNew")
+        |  Nuevo Permiso
+      span(ng-if="!isNew")
+        |  {{permission.name}}
+      a.close.btn.btn-small.btn-outline-primary(type="button", aria-label="Close", data-dismiss="modal")
+        span(aria-hidden="true")
+          | &times;
+  div.modal-body.print-form
+    form.form-horizontal.col-xs-12.col-sm-12.col-md-offset-1.col-xs-offset-1(name="permissionForm", novalidate="novalidate")
+      div.form-group(ng-show="isNew")
+        div.col-sm-8(ng-class="{ 'has-error': permissionForm.name.$invalid && permissionForm.name.$dirty }")
+          label.text-nowrap(for="inputName")
+            | Nombre del Permiso
+          input#inputName.form-control(name="name", type="text", ng-model="permission.name", required, ng-maxlength="45", ng-minlength="3")
+        div.help-block(ng-messages="permissionForm.name.$error" ng-if="permissionForm.name.$invalid && permissionForm.name.$dirty")
+          include ../../messages.pug
+      div.form-group
+        div.col-sm-10
+          table.table.table-striped.table-condensed
+            thead
+              tr
+                th(style="min-width: 100px;")
+                  |  Menu
+                th.text-center(style="min-width: 20px;")
+                  |  Create
+                  div.abc-checkbox(ng-show="!isView")
+                    input.print-hide(id="check-hc", type="checkbox", ng-model="allCreateSelected", ng-show="!isView", ng-change="checkAllCreate()")
+                    label(for="check-hc", ng-show="!isView")
+                th.text-center(style="min-width: 20px;")
+                  |  Read
+                  div.abc-checkbox(ng-show="!isView")
+                    input.print-hide(id="check-hr", type="checkbox", ng-model="allReadSelected", ng-show="!isView", ng-change="checkAllRead()")
+                    label(for="check-hr", ng-show="!isView")
+                th.text-center(style="min-width: 20px;")
+                  |  Update
+                  div.abc-checkbox(ng-show="!isView")
+                    input.print-hide(id="check-hu", type="checkbox", ng-model="allUpdateSelected", ng-show="!isView", ng-change="checkAllUpdate()")
+                    label(for="check-hu", ng-show="!isView")
+                th.text-center(style="min-width: 20px;")
+                  |  Delete
+                  div.abc-checkbox(ng-show="!isView")
+                    input.print-hide(id="check-hd", type="checkbox", ng-model="allDeleteSelected", ng-show="!isView", ng-change="checkAllDelete()")
+                    label(for="check-hd", ng-show="!isView")
+                th.text-center(style="min-width: 20px;")
+                  |  Execute
+                  div.abc-checkbox(ng-show="!isView")
+                    input.print-hide(id="check-he", type="checkbox", ng-model="allExecuteSelected", ng-show="!isView", ng-change="checkAllExecute()")
+                    label(for="check-he", ng-show="!isView")
+            tbody
+              tr(ng-repeat="menu in permission.menus")
+                td
+                  | [id: {{ menu.id }}] - 
+                  span.fa(class="fa-{{ menu.icon }}")
+                  |  {{ menu.name }}
+                td.text-center
+                  div.abc-checkbox.abc-checkbox-primary
+                    input(id="check-c{{ menu.id }}", type="checkbox", ng-model="menu.isCreate", ng-disabled="isView", ng-change="checkCreate(menu.id)", value="c")
+                    label(for="check-c{{ menu.id }}")
+                td.text-center
+                  div.abc-checkbox.abc-checkbox-primary
+                    input(id="check-r{{ menu.id }}", type="checkbox", ng-model="menu.isRead", ng-disabled="isView", ng-change="checkRead(menu.id)", value="r")
+                    label(for="check-r{{ menu.id }}")
+                td.text-center
+                  div.abc-checkbox.abc-checkbox-primary
+                    input(id="check-d{{ menu.id }}", type="checkbox", ng-model="menu.isUpdate", ng-disabled="isView", ng-change="checkUpdate(menu.id)", value="u")
+                    label(for="check-d{{ menu.id }}")
+                td.text-center
+                  div.abc-checkbox.abc-checkbox-primary
+                    input(id="check-u{{ menu.id }}", type="checkbox", ng-model="menu.isDelete", ng-disabled="isView", ng-change="checkDelete(menu.id)", value="d")
+                    label(for="check-u{{ menu.id }}")
+                td.text-center
+                  div.abc-checkbox.abc-checkbox-primary
+                    input(id="check-e{{ menu.id }}", type="checkbox", ng-model="menu.isExecute", ng-disabled="isView", ng-change="checkExecute(menu.id)", value="e")
+                    label(for="check-e{{ menu.id }}")
+      div.row.justify-content-center(ng-if="saving || flashMessage")
+        div.col-md-10
+          div.alert.alert-success.text-center(ng-if="saving")
+            span.fa.fa-hourglass
+            |  {{saving}}
+          div.alert.alert-danger.text-center(ng-if="flashMessage")
+            |  {{flashMessage}}
+  div.modal-footer.print-form
+    div.form-group.print-hide
+      div.col-sm-10.buttons
+        a.btn.btn-small.btn-outline-primary(role="button", data-dismiss="modal")
+          span.fa.fa-triangle-left
+          |  Volver
+        span(ng-if="isView")
+          a.btn.btn-small.btn-primary(print-div=".print-form", print-div-type="form")
+            span.fa.fa-print
+            |  Imprimir
+        span(ng-if="!isView && !isNew")
+          a.btn.btn-small.btn-primary(ng-click="updatePermission(permissionForm.$valid)", ng-disabled="permissionForm.$invalid")
+            span.fa.fa-save
+            |  Guardar
+          a.btn.btn-small.btn-primary(ng-click="deletePermission()")
+            span.fa.fa-trash
+            |  Borrar
+        span(ng-if="!isView && isNew")
+          a.btn.btn-small.btn-primary(ng-click="addPermission(permissionForm.$valid)", ng-disabled="permissionForm.$invalid")
+            span.fa.fa-save
+            |  Añadir

@@ -1,0 +1,52 @@
+doctype html
+html
+  if userName
+    include ./layouts/header.pug
+    link(href="/themes/default/css/navbar-left.css" rel="stylesheet")
+    link(href="/themes/default/css/registry.css" rel="stylesheet")
+    link(href="/themes/default/css/tree.css" rel="stylesheet")
+    link(href="/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css" rel="stylesheet")
+    link(href="/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet")
+    link(href="/bootstrap-datepicker/dist/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet")
+    body.internal
+      include ./layouts/navbars/top.pug
+      div#wrapper(ng-app="ngregisgen")
+        include ./layouts/navbars/tree.pug
+        div#page-content-wrapper(ng-view="")
+    script(src="/popper.js/dist/umd/popper.min.js")
+    include ./layouts/footer.pug
+    script(src="/angular/angular.js")
+    script(src="/angular-route/angular-route.min.js")
+    script(src="/angular-resource/angular-resource.min.js")
+    script(src="/angular-messages/angular-messages.min.js")
+    script(src="/angular-sanitize/angular-sanitize.min.js")
+    script(src="/ng-file-upload/dist/ng-file-upload-shim.min.js")
+    script(src="/ng-file-upload/dist/ng-file-upload.min.js")
+    script(src="/@bradchesney79/ui-bootstrap-tpls/index.js")
+    script(src="/bootstrap-select/dist/js/bootstrap-select.min.js")
+    script(src="/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js")
+    script(src="/bootstrap-datepicker/dist/locales/bootstrap-datepicker.es.min.js" charset="UTF-8")
+    script(src="/jquery-dateformat/dist/jquery-dateformat.min.js")
+    script(src="/libs/angular/angular-table-scroll.js")
+    script(src="/libs/jquery/jquery-printThis.js")
+    script(src="/app.js")
+    script(src="/services/app.js")
+    script(src="/services/departments.js")
+    script(src="/services/logout.js")
+    script(src="/services/menus.js")
+    script(src="/services/permissions.js")
+    script(src="/services/registry.js")
+    script(src="/services/thirdparties.js")
+    script(src="/services/users.js")
+    script(src="/controllers/departments.js")
+    script(src="/controllers/menus.js")
+    script(src="/controllers/permissions.js")
+    script(src="/controllers/registry.js")
+    script(src="/controllers/thirdparties.js")
+    script(src="/controllers/tree.js")
+    script(src="/controllers/users.js")
+  else
+    include ./layouts/header.pug
+    body
+      include ./login.pug
+    include ./layouts/footer.pug

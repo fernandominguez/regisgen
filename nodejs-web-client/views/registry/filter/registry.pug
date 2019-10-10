@@ -1,0 +1,156 @@
+div.modal-content.panel.panel-danger
+  div.modal-header
+    div.panel-title
+      span
+        | Filtrar Anotaciones
+      a.close.btn.btn-small.btn-outline-primary(type="button", aria-label="Close", data-dismiss="modal")
+        span(aria-hidden="true")
+          | &times;
+  div.modal-body.print-form
+    form.form-horizontal.col-xs-12.col-sm-12.col-md-offset-1.col-xs-offset-1(name="filterForm", novalidate="novalidate")
+      div.form-group
+        div.col-sm-6
+          label.text-nowrap(for="inputNumberFrom")
+            | Desde el Número
+          input#inputNumberFrom.form-control(name="numberFrom", type="text")
+        div.col-sm-6
+          label.text-nowrap(for="inputNumberTo")
+            | Hasta el Número
+          input#inputNumberTo.form-control(name="numberTo", type="text")
+      div.form-group
+        div.col-sm-6
+          label.text-nowrap(for="inputDateFrom")
+            | Desde la Fecha
+          div.input-group.date(data-provide="datepicker", data-date-format="dd/mm/yyyy", data-date-language="es", data-date-orientation="bottom auto", data-date-today-btn="true", data-date-today-highlight="true")
+            span.input-group-addon
+              i.fa.fa-calendar
+            input#inputDateFrom.form-control.text-center(name="dateFrom", type="text", ng-minlength="10", ng-maxlength="10")
+            div.help-block(ng-messages="filterForm.dateFrom.$error" ng-if="filterForm.dateFrom.$invalid && filterForm.dateFrom.$dirty")
+              include ../../messages.pug
+        div.col-sm-6
+          label.text-nowrap(for="inputDateTo")
+            | Hasta la Fecha
+          div.input-group.date(data-provide="datepicker", data-date-format="dd/mm/yyyy", data-date-language="es", data-date-orientation="bottom auto", data-date-today-btn="true", data-date-today-highlight="true")
+            span.input-group-addon
+              i.fa.fa-calendar
+            input#inputDateTo.form-control.text-center(name="dateTo", type="text", ng-minlength="10", ng-maxlength="10")
+            div.help-block(ng-messages="filterForm.dateTo.$error" ng-if="filterForm.dateTo.$invalid && filterForm.dateTo.$dirty")
+              include ../../messages.pug
+      div.form-group
+        div.col-sm-6.text-center(ng-class="{ 'has-error': (filterForm.subtype.$invalid && filterForm.subtype.$dirty) }")
+          label.text-nowrap(for="inputType")
+            | Tipo
+          div#inputType.col-sm-12.text-center.form-radio-group
+            div.abc-radio.abc-radio-info.form-check-inline
+              input(name="type", type="radio", value="e")
+              label
+                | Entrada
+            div.abc-radio.abc-radio-info.form-check-inline
+              input(name="type", type="radio", value="s")
+              label
+                | Salida
+          div.help-block(ng-messages="filterForm.type.$error" ng-if="filterForm.type.$invalid && filterForm.type.$dirty")
+            include ../../messages.pug
+        div.col-sm-6.text-center(ng-class="{ 'has-error': (filterForm.subtype.$invalid && filterForm.subtype.$dirty) }")
+          label.text-nowrap(for="inputSubtype")
+            | Subtipo
+          div#inputSubtype.col-sm-12.text-center.form-radio-group
+            div.abc-radio.abc-radio-info.form-check-inline
+              input(name="subtype", type="radio", value="i")
+              label
+                | Interna
+            div.abc-radio.abc-radio-info.form-check-inline
+              input(name="subtype", type="radio", value="e")
+              label
+                | Externa
+          div.help-block(ng-messages="filterForm.subtype.$error" ng-if="filterForm.subtype.$invalid && filterForm.subtype.$dirty")
+            include ../../messages.pug
+      div.form-group(ng-if="(note.type == 's' && note.subtype == 'e') || note.subtype == 'i'")
+        div.col-sm-12
+          label.text-nowrap(for="inputInOr")
+            | Departamento de Origen
+          input#inputInOr.form-control(name="inor", type="text")
+      div.form-group(ng-if="(note.type == 's' && note.subtype == 'e')")
+        div.col-sm-12
+          label.text-nowrap(for="inputExDe")
+            | Tercero Destinatario
+          input#inputExDe.form-control(name="exde", type="text")
+      div.form-group(ng-if="(note.type == 'e' && note.subtype == 'e') || note.subtype == 'i'")
+        div.col-sm-12
+          label.text-nowrap(for="inputInDe")
+            | Departamento Destinatario
+          input#inputInDe.form-control(name="inde", type="text")
+      div.form-group.print-hide(ng-if="isNew")
+        div#origin.col-sm-6(ng-class="{ 'has-error': filterForm.origin.$invalid && filterForm.origin.$dirty }")
+          div#exor.text-center(ng-show="filterForm.type.$viewValue == 'e' && filterForm.subtype.$viewValue == 'e'")
+            label.text-nowrap(for="selectExOr")
+              | Tercero de Origen
+            div(style="float: left; position: relative; width: 100%;")
+              div(style="float:left; position:relative;")
+                select#selectExOr.selectpicker.form-control(name="exor", multiple, data-max-options="1", data-none-selected-text="Selecciona Origen ...", data-live-search="true", data-size="10")
+          div#inor.text-center(ng-show="(filerForm.type.$viewValue == 's' && filterForm.subtype.$viewValue == 'e') || ((filterForm.type.$viewValue == 'e' || filterForm.type.$viewValue == 's') && filterForm.subtype.$viewValue == 'i')")
+            label.text-nowrap(for="selectInOr")
+              | Departamento de Origen
+            select#selectInOr.selectpicker.form-control(name="inor", multiple, data-max-options="1", data-none-selected-text="Selecciona Origen ...", data-live-search="true", data-size="10")
+          div.help-block(ng-messages="filterForm.origin.$error" ng-if="filterForm.origin.$invalid && filterForm.origin.$dirty")
+            include ../../messages.pug
+        div#destiny.col-sm-6(ng-class="{ 'has-error': (filterForm.destiny.$invalid && filterForm.destiny.$dirty) }")
+          div#exde.text-center(ng-show="filterForm.type.$viewValue == 's' && filterForm.subtype.$viewValue == 'e'")
+            label.text-nowrap(for="selectExDe")
+              | Tercero Destinatario
+              div(style="float: left; position: relative; width: 100%;")
+                div(style="float:left; position:relative;")
+                  select#selectExDe.selectpicker.form-control(name="exde", multiple, data-max-options="1", data-none-selected-text="Selecciona Destinatario ...", data-live-search="true", data-size="10")
+          div#inde.text-center(ng-show="(filterForm.type.$viewValue == 'e' && filterForm.subtype.$viewValue == 'e') || ((filterForm.type.$viewValue == 'e' || filterForm.type.$viewValue == 's') && filterForm.subtype.$viewValue == 'i')")
+            label.text-nowrap(for="selectInDe")
+              | Departamento Destinatario
+            select#selectInDe.selectpicker.form-control(name="inde", multiple, data-max-options="1", data-none-selected-text="Selecciona Destinatario ...", data-live-search="true", data-size="10")
+          div.help-block(ng-messages="filterForm.destiny.$error" ng-if="(!isNew && filterForm.destiny.$invalid) || (isNew && filterForm.destiny.$invalid && filterForm.destiny.$dirty)")
+            include ../../messages.pug
+      div.form-group
+        div.col-sm-12(ng-class="{ 'has-error': filterForm.title.$invalid && filterForm.title.$dirty }")
+          label.text-nowrap(for="inputTitle")
+            | Título
+          input#inputTitle.form-control(name="title", type="text", ng-maxlength="255", ng-minlength="10")
+          div.help-block(ng-messages="filterForm.title.$error" ng-if="filterForm.title.$invalid && filterForm.title.$dirty")
+            include ../../messages.pug
+      div.form-group
+        div.col-sm-12(ng-class="{ 'has-error': (isNew && filterForm.content.$invalid && filterForm.content.$dirty) }")
+          label.text-nowrap(for="inputContent")
+            | Contenido
+          textarea#inputContent.form-control(name="content", type="text", rows="5", ng-minlength="10", ng-maxlength="2000")
+          div.help-block(ng-messages="filterForm.content.$error" ng-if="filterForm.content.$invalid && filterForm.content.$dirty")
+            include ../../messages.pug
+      div.form-group.print-hide
+        div.col-sm-4.text-center(ng-class="{ 'has-error': (filterForm.channel.$invalid && filterForm.channel.$dirty) }")
+          label.text-nowrap(for="selectChannel")
+            | Canal de Transmisión
+          select#selectChannel.selectpicker.form-control(name="channel", multiple, data-max-options="1", data-width="100%", data-none-selected-text="Nada Seleccionado")
+          div.help-block(ng-messages="filterForm.channel.$error" ng-if="filterForm.channel.$invalid && filterForm.channel.$dirty")
+            include ../../messages.pug
+        div.col-sm-4.text-center(ng-class="{ 'has-error': (filterForm.tag.$invalid && filterForm.tag.$dirty) }")
+          label.text-nowrap(for="selectTag")
+            | Etiqueta
+          select#selectTag.selectpicker.form-control(name="tag", multiple, data-max-options="1", data-width="100%", data-none-selected-text="Nada Seleccionado")
+          div.help-block(ng-messages="filterForm.tag.$error" ng-if="filterForm.tag.$invalid && filterForm.tag.$dirty")
+            include ../../messages.pug
+        div.col-sm-4.text-center(ng-class="{ 'has-error': (filterForm.state.$invalid && filterForm.state.$dirty) }")
+          label.text-nowrap(for="selectState")
+            | Estado
+          select#selectState.selectpicker.form-control(name="state", ng-model="note.state", multiple, data-max-options="1", data-width="100%", data-none-selected-text="Nada Seleccionado")
+          div.help-block(ng-messages="filterForm.state.$error" ng-if="filterForm.state.$invalid && filterForm.state.$dirty")
+            include ../../messages.pug
+      div.row.justify-content-center(ng-if="flashMessage")
+        div.col-md-12
+          div.alert.alert-danger.text-center(ng-if="flashMessage")
+            |  {{flashMessage}}
+  div.modal-footer.print-form
+    div.form-group.print-hide
+      div.col-sm-12.buttons
+        a.btn.btn-small.btn-outline-primary(role="button", data-dismiss="modal")
+          span.fa.fa-triangle-left
+          |  Volver
+        span
+          a.btn.btn-small.btn-primary(ng-click="filterList(filterForm.$valid)", ng-disabled="filterForm.$invalid", ng-if="menuCrude.indexOf('r')>=0")
+            span.fa.fa-play
+            |  Filtrar

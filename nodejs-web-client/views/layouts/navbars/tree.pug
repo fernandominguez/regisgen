@@ -1,0 +1,9 @@
+div#sidebar-wrapper(ng-controller="TreeCtrl")
+  script#menuTree(type="text/ng-template")
+    a(href="{{ menu.href }}", ng-if="menu.crude.indexOf('e')>=0")
+      span.fa(class="fa-{{ menu.icon }}")
+      | {{(menu.name  == 'user-menu') ? username : menu.name}}
+    ul.nav-pills.nav-stacked(style="list-style-type:none;", sng-if="menu.children", ng-show="menu.active")
+      li(ng-repeat="menu in menu.children as children", ng-include="'menuTree'", ng-click="selectMenu(menu.crude); changeClass(menu); showChildren(menu, children); $event.stopPropagation();", ng-class="menu.class")
+  ul#menu.sidebar-nav.nav-pills.nav-stacked
+    li(ng-repeat="menu in $root.menus", ng-include="'menuTree'", ng-click="selectMenu(menu.crude); changeClass(menu); showChildren(menu, $root.menus); $event.stopPropagation();", ng-class="menu.class")

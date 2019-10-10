@@ -1,0 +1,77 @@
+div.container-fluid.xyz(ng-if="menuCrude.indexOf('e')>=0", ng-controller="DepartmentListCtrl")
+  div.row
+    div.col-md-4
+      div(class='form-group has-feedback has-feedback-right')
+        input.form-control(type="text", ng-model="search", ng-change="filter()", placeholder="Buscar")
+        i(class='form-control-feedback fa fa-search')
+    div.col-md-1
+      select#selectPages.selectpicker(ng-model="entryLimit", multiple, data-max-options="1", title="Departamentos por página ...")
+        option(value="10") 10 departamentos por página
+        option(value="20") 20 departamentos por página
+        option(value="50") 50 departamentos por página
+        option(value="100") 100 departamentos por página
+  div.row
+    div.col-lg-12.data.printable
+      table.table.table-striped.table-condensed
+        thead
+          tr
+            th.print-hide(style="width:25px; min-width: 25px; max-width: 25px;")
+              input(type="checkbox", ng-model="allIdsSelected", ng-change="checkAll()")
+            th.text-center(style="width:60px; min-width: 60px; max-width: 60px;", ng-click="sort_by('id')", title="Pulsa para ordenar por esta columna.")
+              | [Id:]
+            th.(style="width:150px; min-width: 150px; max-width: 150px;", ng-click="sort_by('name')", title="Pulsa para ordenar por esta columna.")
+              | Nombre
+            th(style="min-width: 150px;", ng-click="sort_by('address')", title="Pulsa para ordenar por esta columna.")
+              | Dirección
+            th.text-center(style="min-width: 150px;", ng-click="sort_by('phone')", title="Pulsa para ordenar por esta columna.")
+              | Teléfono
+            th(style="width:100px; min-width: 100px; max-width:100px;", ng-click="sort_by('email')", title="Pulsa para ordenar por esta columna.")
+              | Email
+            th.text-center(style="width:50px; min-width: 50px; max-width: 50px;", ng-click="sort_by('office')", title="Pulsa para ordenar por esta columna.")
+              | Office
+            th.print-hide(style="width:50px; min-width: 50px; max-width: 50px;")
+              a.btn.btn-small.btn-success(print-div=".printable", print-div-type="list", print-div-title="Listado de Departamentos", title="Imprimir Listado", ng-disabled="filteredItems == 0")
+                span.fa.fa-print
+            th.print-hide(style="width:50px; min-width: 50px; max-width: 50px;")
+              a.btn.btn-small.btn-warning(ng-click="newDepartment()", data-toggle="modal", title="Nuevo Tercero", data-target="#departmentModal", ng-if="menuCrude.indexOf('c')>=0")
+                span.fa.fa-plus
+            th.print-hide(style="width:50px; min-width: 50px; max-width: 50px;")
+              a.btn.btn-small.btn-primary(ng-click="deleteSelectedThirdparties()", title="Borrar Seleccionados", ng-disabled="!anyIdsSelected", ng-if="menuCrude.indexOf('d')>=0")
+                span.fa.fa-trash
+        tbody
+          tr(ng-repeat="department in filtered = (thirdparties | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit")
+            td.print-hide
+              input(type="checkbox", ng-model="department.isChecked", ng-change="checkDepartment($index)", value="department.id")
+            td.text-center
+              | {{ department.id }}
+            td
+              | {{ department.name }}
+            td
+              | {{ department.address }}
+            td.text-center
+              | {{ department.phone }}
+            td.text-center
+              | {{ department.email }}
+            td
+              | {{ department.office }}
+            td.print-hide
+              a.btn.btn-small.btn-success(ng-click="viewDepartment(department.id)", data-toggle="modal", title="Ver Datos", data-target="#departmentModal", ng-if="menuCrude.indexOf('r')>=0")
+                span.fa.fa-share-alt
+            td.print-hide
+              a.btn.btn-small.btn-warning(ng-click="editDepartment(department.id)", data-toggle="modal", title="Modificar Datos", data-target="#departmentModal", ng-if="menuCrude.indexOf('u')>=0")
+                span.fa.fa-pencil
+            td.print-hide
+              a.btn.btn-small.btn-primary(ng-click="deleteDepartment(department.id)", title="Borrar Departamento", ng-if="menuCrude.indexOf('d')>=0")
+                span.fa.fa-trash
+    div.col-lg-12(ng-show="filteredItems == 0")
+      div.col-lg-12
+        h4
+          | No se han encontrado departamentos.
+    div.col-lg-12(ng-show="filteredItems > 0")
+      div.col-md-9
+        ul.pagination-sm(uib-pagination, ng-model="currentPage", max-size="10", on-select-page="setPage(page)", boundary-links="true", total-items="filteredItems", items-per-page="entryLimit", force-ellipses="true", first-text="Primera", previous-text="Anterior", next-text="Siguiente", last-text="Última")
+      div.col-md-3.list-counter.text-right.text-nowrap.small
+          | Listando {{ filtered.length }} de {{ totalItems }} Departamento(s).
+    div#departmentModal.modal.fade.in.col-xs-12.col-sm-6.col-md-6.col-md-offset-4.col-xs-offset-3(role="dialog")
+      div.modal-dialog.modal-lg
+        include ../crude/departments

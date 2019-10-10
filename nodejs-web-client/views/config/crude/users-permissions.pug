@@ -1,0 +1,41 @@
+div.modal-content.panel.panel-danger
+  div.modal-header
+    div.panel-title
+      span
+        |  Permisos de {{user.name}} {{user.surname}}
+      a.close.btn.btn-small.btn-outline-primary(type="button", aria-label="Close", data-dismiss="modal")
+        span(aria-hidden="true")
+          | &times;
+  div.modal-body.print-form
+    form.form-horizontal.col-xs-12.col-sm-12.col-md-offset-1.col-xs-offset-1(name="userPermissionsForm", novalidate="novalidate")
+      div.form-group
+        div.col-sm-12
+        table.table.table-striped.table-condensed
+          thead
+            tr
+              th.print-hide(style="width:30px; min-width: 30px; max-width: 30px;")
+                input(type="checkbox", ng-model="allPermissionsSelected", ng-change="checkAllPermissions()")
+              th(style="min-width: 70px;")
+                |  Permisos de Menús
+          tbody
+            tr(ng-repeat="permission in user.permissions")
+              td.print-hide
+                input(type="checkbox", ng-model="permission.isChecked", ng-change="checkPermission($index)", value="permission.id")
+              td
+                | {{ permission.name }}
+      div.row.justify-content-center(ng-if="saving || flashMessage")
+        div.col-md-12
+          div.alert.alert-success.text-center(ng-if="saving")
+            span.fa.fa-hourglass
+            |  {{saving}}
+          div.alert.alert-danger.text-center(ng-if="flashMessage")
+            |  {{flashMessage}}
+  div.modal-footer.print-form
+      div.form-group.print-hide
+        div.col-sm-12.buttons
+          a.btn.btn-small.btn-outline-primary(data-dismiss="modal")
+            span.fa.fa-triangle-left
+            |  Volver
+          a.btn.btn-small.btn-primary(ng-click="updateUserPermissions()", ng-if="menuCrude.indexOf('c')>=0 || menuCrude.indexOf('u')>=0")
+            span.fa.fa-save
+            |  Guardar

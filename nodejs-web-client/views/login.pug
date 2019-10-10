@@ -1,0 +1,24 @@
+div.container-fluid.page-wrap
+  div.row.d-flex.justify-content-center
+    div.col-xs-8.col-sm-8.col-md-4.col-md-offset-4.col-xs-offset-2
+      div.account-wall
+        form(class='signin-form' action='/signin' method='post')
+          div(class='form-group languages')
+            a(href='/' + locale)
+              = language
+          img(class='logo-img' src='/themes/default/img/logo.jpg')
+          div(class='form-group form-group-email has-feedback has-feedback-left')
+            input(type='text' name='username' class='form-control' placeholder=phUsername, required, autofocus)
+            i(class='form-control-feedback fa fa-user')
+          div(class='form-group form-group-password has-feedback has-feedback-left')
+            input(type='password' name='password' class='form-control' placeholder=phPassword, required)
+            i(class='form-control-feedback fa fa-lock')
+          button(class='btn btn-lg btn-primary btn-block' type='submit')= btnSignin
+          div(class='form-group')
+            a(href='/signup')
+              = register
+          span.clearfix
+  if (flashMessage && flashMessage.length)
+    div.row.flashMessage.d-flex.justify-content-center
+      div.col-md-4.col-md-offset-4
+        div.alert.alert-danger.text-center= flashMessage

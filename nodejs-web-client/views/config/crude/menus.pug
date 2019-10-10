@@ -1,0 +1,85 @@
+div.modal-content.panel.panel-danger
+  div.modal-header
+    div.panel-title
+      span(ng-if="isNew")
+        |  Nuevo Menú
+      span(ng-if="!isNew")
+        |  {{menu.name}}
+      a.close.btn.btn-small.btn-outline-primary(type="button", aria-label="Close", data-dismiss="modal")
+        span(aria-hidden="true")
+          | &times;
+  div.modal-body.print-form
+    form.form-horizontal.col-xs-12.col-sm-12.col-md-offset-1.col-xs-offset-1(name="menuForm", novalidate="novalidate")
+      div.form-group(ng-show="isNew")
+        div.col-sm-8(ng-class="{ 'has-error': menuForm.name.$invalid && menuForm.name.$dirty }")
+          label.text-nowrap(for="inputName")
+            | Nombre del Menú
+          input#inputName.form-control(name="name", type="text", ng-model="menu.name", required, ng-maxlength="45", ng-minlength="3")
+          div.help-block.col-sm-8(ng-messages="menuForm.name.$error" ng-if="menuForm.name.$invalid && menuForm.name.$dirty")
+            include ../../messages.pug
+      div.form-group
+        div.col-sm-4(ng-class="{ 'has-error': (!isNew && menuForm.parent.$invalid) || (isNew && menuForm.parent.$invalid && menuForm.parent.$dirty) }")
+          label.text-nowrap(for="inputParent", ng-show="isView") Menú Padre
+          div.input-group(ng-show="isView")
+            span.input-group-addon
+              i.fa(class="fa-{{ menu.parentIcon }}")
+            input#inputParent.form-control(name="parentName", type="text", ng-model="menu.parentName", disabled)
+          label.text-nowrap(for="selectParent", ng-show="!isView") Menú Padre
+          select#selectParent.selectpicker(name="parent", ng-model="menu.parent", multiple, data-max-options="1", ng-show="!isView", data-live-search="true")
+          div.help-block.col-sm-8(ng-messages="menuForm.parent.$error", ng-if="(!isNew && menuForm.parent.$invalid) || (isNew && menuForm.parent.$invalid && menuForm.parent.$dirty)")
+            include ../../messages.pug
+        div.col-sm-4(ng-class="{ 'has-error': (!isNew && menuForm.icon.$invalid) || (isNew && menuForm.icon.$invalid && menuForm.icon.$dirty) }")
+          label.text-nowrap(for="inputIcon", ng-show="isView") Icono
+          div.input-group(ng-show="isView")
+            span.input-group-addon
+              i.fa(class="fa-{{ menu.icon }}")
+            input#inputIcon.form-control(name="icon", type="text", ng-model="menu.icon", required, disabled, ng-show="isView")
+          label.text-nowrap(for="selectIcon", ng-show="!isView") Icono
+          select#selectIcon.selectpicker(name="icon", ng-model="menu.icon", multiple, data-max-options="1", ng-show="!isView", data-live-search="true")
+          div.help-block.col-sm-8(ng-messages="menuForm.icon.$error" ng-if="(!isNew && menuForm.icon.$invalid) || (isNew && menuForm.icon.$invalid && menuForm.icon.$dirty)")
+            include ../../messages.pug
+      div.form-group
+        div.col-sm-8(ng-class="{ 'has-error': (!isNew && menuForm.href.$invalid) || (isNew && menuForm.href.$invalid && menuForm.href.$dirty) }")
+          label.text-nowrap(for="inputHref")
+            |  Href
+          div.input-group
+            span.input-group-addon
+              i.fa.fa-hashtag
+              i.fa.fa-exclamation
+            input#inputHref.form-control(name="href", type="text", ng-model="menu.hashedHref", ng-disabled="isView", ng-maxlength="255")
+          div.help-block.col-sm-8(ng-messages="menuForm.href.$error" ng-if="(!isNew && menuForm.href.$invalid) || (isNew && menuForm.href.$invalid && menuForm.href.$dirty)")
+            include ../../messages.pug
+        div.col-sm-2(ng-class="{ 'has-error': (!isNew && menuForm.order.$invalid) || (isNew && menuForm.order.$invalid && menuForm.order.$dirty) }")
+          label.text-nowrap(for="inputOrder")
+            | Orden
+          input#inputOrder.form-control.text-center(name="order", type="text", ng-model="menu.order", required, ng-disabled="isView", ng-pattern="/^[0-9]{1,3}$/")
+          div.help-block.col-sm-8(ng-messages="menuForm.order.$error" ng-if="(!isNew && menuForm.order.$invalid) || (isNew && menuForm.order.$invalid && menuForm.order.$dirty)")
+            include ../../messages.pug
+      div.row.justify-content-center(ng-if="saving || flashMessage")
+        div.col-md-10
+          div.alert.alert-success.text-center(ng-if="saving")
+            span.fa.fa-hourglass
+            |  {{saving}}
+          div.alert.alert-danger.text-center(ng-if="flashMessage")
+            |  {{flashMessage}}
+  div.modal-footer.print-form
+    div.form-group.print-hide
+      div.col-sm-10.buttons
+        a.btn.btn-small.btn-outline-primary(role="button", data-dismiss="modal")
+          span.fa.fa-angle-left
+          |  Volver
+        span(ng-if="isView")
+          a.btn.btn-small.btn-primary(print-div=".print-form", print-div-type="form")
+            span.fa.fa-print
+            |  Imprimir
+        span(ng-if="!isView && !isNew")
+          a.btn.btn-small.btn-primary(ng-click="updateMenu(menuForm.$valid)", ng-disabled="menuForm.$invalid", ng-if="menuCrude.indexOf('u')>=0")
+            span.fa.fa-save
+            |  Guardar
+          a.btn.btn-small.btn-primary(ng-click="deleteMenu()", ng-if="menuCrude.indexOf('d')>=0")
+            span.fa.fa-trash
+            |  Borrar
+        span(ng-if="!isView && isNew")
+          a.btn.btn-small.btn-primary(ng-click="addMenu(menuForm.$valid)", ng-disabled="menuForm.$invalid", ng-if="menuCrude.indexOf('c')>=0")
+            span.fa.fa-save
+            |  Añadir

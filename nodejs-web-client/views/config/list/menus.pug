@@ -1,0 +1,81 @@
+div.container-fluid.xyz(ng-if="menuCrude.indexOf('e')>=0", ng-controller="MenuListCtrl")
+  div.row
+    div.col-md-4
+      div(class='form-group has-feedback has-feedback-right')
+        input.form-control(type="text", ng-model="search", ng-change="filter()", placeholder="Buscar")
+        i(class='form-control-feedback fa fa-search')
+    div.col-md-1
+      select#selectPages.selectpicker(ng-model="entryLimit", multiple, data-max-options="1", title="Menús por página ...")
+        option(value="10") 10 menús por página
+        option(value="20") 20 menús por página
+        option(value="50") 50 menús por página
+        option(value="100") 100 menús por página
+  div.row
+    div.col-lg-12.data.printable
+      table.table.table-striped.table-condensed
+        thead
+          tr
+            th.print-hide(style="min-width: 20px; max-width: 20px; width: 20px;")
+              // TODO - Change input style to .abc-checkbox.
+              input(type="checkbox", ng-model="allIdsSelected", ng-change="checkAll()")
+            th.text-center(style="min-width: 20px; max-width: 30px;", ng-click="sort_by('id')", title="Pulsa para ordenar por esta columna.")
+              |  [Id:]
+            th(style="min-width: 70px;", ng-click="sort_by('parent')", title="Pulsa para ordenar por esta columna.")
+              |  Padre
+            th(style="min-width: 70px;", ng-click="sort_by('id')", title="Pulsa para ordenar por esta columna.")
+              |  Nombre
+            th.text-center(style="min-width: 20px; max-width: 30px;", ng-click="sort_by('icon')", title="Pulsa para ordenar por esta columna.")
+              |  Icono
+            th(style="min-width: 100px;", ng-click="sort_by('href')", title="Pulsa para ordenar por esta columna.")
+              span.fa.fa-hashtag
+              span.fa.fa-exclamation
+              |  Href
+            th.text-center(style="min-width: 20px;", ng-click="sort_by('order')", title="Pulsa para ordenar por esta columna.")
+              |  Orden
+            th.print-hide(style="width:50px; min-width: 50px; max-width: 50px;")
+              a.btn.btn-small.btn-success(print-div=".printable", print-div-type="list", print-div-title="Listado de Menús", title="Imprimir Listado", ng-disabled="filteredItems == 0")
+                span.fa.fa-print
+            th.print-hide(style="width:50px; min-width: 50px; max-width: 50px;")
+              a.btn.btn-small.btn-primary(ng-click="newMenu()", data-toggle="modal", title="Nuevo Menú", data-target="#menuModal", ng-if="menuCrude.indexOf('c')>=0")
+                span.fa.fa-plus
+            th.print-hide(style="width:50px; min-width: 50px; max-width: 50px;")
+              a.btn.btn-small.btn-primary(ng-click="deleteSelectedMenus()", title="Borrar Seleccionados", ng-disabled="!anyIdsSelected", ng-if="menuCrude.indexOf('d')>=0")
+                span.fa.fa-trash
+        tbody
+          tr(ng-repeat="menu in filtered = (menus | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit")
+            td.print-hide
+              // TODO - Change input style to .abc-checkbox.
+              input(type="checkbox", ng-model="menu.isChecked", ng-change="checkMenu($index)", value="menu.id")
+            td.text-center
+              | {{ menu.id }}
+            td
+              | {{ menu.parentName }}
+            td
+              | {{ menu.name }}
+            td.text-center
+              span.fa(class="fa-{{ menu.icon }}")
+            td
+              | {{ menu.href }}
+            td.text-center
+              | {{ menu.order }}
+            td.print-hide
+              a.btn.btn-small.btn-success(ng-click="viewMenu(menu.id)", data-toggle="modal", title="Ver Datos", data-target="#menuModal", ng-if="menuCrude.indexOf('r')>=0")
+                span.fa.fa-share-alt
+            td.print-hide
+              a.btn.btn-small.btn-primary(ng-click="editMenu(menu.id)", data-toggle="modal", title="Modificar Datos", data-target="#menuModal", ng-if="menuCrude.indexOf('u')>=0")
+                span.fa.fa-pencil
+            td.print-hide
+              a.btn.btn-small.btn-primary(ng-click="deleteMenu(menu.id)", title="Borrar Menu", ng-if="menuCrude.indexOf('d')>=0")
+                span.fa.fa-trash
+    div.col-lg-12(ng-show="filteredItems == 0")
+      div.col-lg-12
+        h4
+          | No se han encontrado menús.
+    div.col-lg-12(ng-show="filteredItems > 0")
+      div.col-md-9
+        ul.pagination-sm(uib-pagination, ng-model="currentPage", max-size="10", on-select-page="setPage(page)", boundary-links="true", total-items="filteredItems", items-per-page="entryLimit", force-ellipses="true", first-text="Primero", previous-text="Anterior", next-text="Siguiente", last-text="Último")
+      div.col-md-3.list-counter.text-right.text-nowrap.small
+          | Listando {{ filtered.length }} de {{ totalItems }} menú(s).
+    div#menuModal.modal.fade.in.col-xs-12.col-sm-6.col-md-6.col-md-offset-4.col-xs-offset-3(role="dialog")
+      div.modal-dialog.modal-lg
+        include ../crude/menus

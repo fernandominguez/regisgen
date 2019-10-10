@@ -1,0 +1,87 @@
+div.modal-content.panel.panel-danger
+  div.modal-header
+    div.panel-title
+      span(ng-if="isNew")
+        | Nuevo Departamento
+      span(ng-if="!isNew")
+        | {{ department.name }}
+      a.close.btn.btn-small.btn-outline-primary(type="button", aria-label="Close", ng-click="closeModal('departmentModal')", ng-if="fromModal")
+        span(aria-hidden="true")
+          | &times;
+      a.close.btn.btn-small.btn-outline-primary(type="button", aria-label="Close", data-dismiss="modal", ng-if="!fromModal")
+        span(aria-hidden="true")
+          | &times;
+  div.modal-body.print-form
+    form.form-horizontal.col-xs-12.col-sm-12.col-md-offset-1.col-xs-offset-1(name="departmentForm", novalidate="novalidate")
+      div.form-group
+        div.col-sm-12(ng-class="{ 'has-error': departmentForm.name.$invalid && departmentForm.name.$dirty }")
+          label.text-nowrap(for="inputName")
+            | Nombre
+          input#inputName.form-control(name="name", type="text", ng-model="department.name", required, ng-disabled="isView", ng-maxlength="60", ng-minlength="2")
+          div.help-block(ng-messages="departmentForm.name.$error" ng-if="departmentForm.name.$invalid && departmentForm.name.$dirty")
+            include ../../messages.pug
+      div.form-group
+        div.col-sm-10(ng-class="{ 'has-error': (!isNew && departmentForm.address.$invalid) || (isNew && departmentForm.address.$invalid && departmentForm.address.$dirty) }")
+          label.text-nowrap(for="inputAddress")
+            span.fa.fa-map-marker
+            |  Dirección
+          input#inputAddress.form-control(name="address", type="text", ng-model="department.address", ng-disabled="isView", ng-maxlength="255")
+          div.help-block(ng-messages="departmentForm.address.$error" ng-if="(!isNew && departmentForm.address.$invalid) || (isNew && departmentForm.address.$invalid && departmentForm.address.$dirty)")
+            include ../../messages.pug
+        div.col-sm-2(ng-class="{ 'has-error': (!isNew && departmentForm.office.$invalid) || (isNew && departmentForm.office.$invalid && departmentForm.office.$dirty) }")
+          label.text-nowrap(for="inputOffice")
+            | Sala
+          input#inputOffice.form-control.text-center(name="office", type="text", ng-model="department.office", required, ng-disabled="isView", ng-minlength="3", ng-maxlength="3", ng-pattern="/^\[0-9]{3}$/")
+          div.help-block(ng-messages="departmentForm.office.$error" ng-if="(!isNew && departmentForm.office.$invalid) || (isNew && departmentForm.office.$invalid && departmentForm.office.$dirty)")
+            include ../../messages.pug
+      div.form-group
+        div.col-sm-12(ng-class="{ 'has-error': (!isNew && departmentForm.email.$invalid) || (isNew && departmentForm.email.$invalid && departmentForm.email.$dirty) }")
+          label.text-nowrap(for="inputEmail")
+            span.fa.fa-envelope
+            |  Email
+          input#inputEmail.form-control(name="email", type="email", ng-model="department.email", ng-disabled="isView", ng-maxlength="255")
+          div.help-block(ng-messages="departmentForm.email.$error" ng-if="(!isNew && departmentForm.email.$invalid) || (isNew && departmentForm.email.$invalid && departmentForm.email.$dirty)")
+            include ../../messages.pug
+      div.form-group
+        div.col-sm-4(ng-class="{ 'has-error': (!isNew && departmentForm.phone.$invalid) || (isNew && departmentForm.phone.$invalid && departmentForm.phone.$dirty) }")
+          label.text-nowrap(for="inputPhone")
+            span.fa.fa-phone
+            |  Teléfono
+          input#inputPhone.form-control.text-center(name="phone", type="text", ng-model="department.phone", ng-disabled="isView", ng-maxlength="9", ng-minlength="9", ng-pattern="/^\[0-9]{9}$/")
+          div.help-block(ng-messages="departmentForm.phone.$error" ng-if="(!isNew && departmentForm.phone.$invalid) || (isNew && departmentForm.phone.$invalid && departmentForm.phone.$dirty)")
+            include ../../messages.pug
+      div.row.justify-content-center(ng-if="fromModal && (modalSaving || modalFlashMessage)")
+        div.col-md-12
+          div.alert.alert-success.text-center(ng-if="modalSaving")
+            span.fa.fa-hourglass
+            |  {{modalSaving}}
+          div.alert.alert-danger.text-center(ng-if="modalFlashMessage")
+            |  {{modalFlashMessage}}
+      div.row.justify-content-center(ng-if="!fromModal && (saving || flashMessage)")
+        div.col-md-12
+          div.alert.alert-success.text-center(ng-if="saving")
+            span.fa.fa-hourglass
+            |  {{saving}}
+          div.alert.alert-danger.text-center(ng-if="flashMessage")
+            |  {{flashMessage}}
+  div.modal-footer.print-form
+      div.form-group.print-hide
+        div.col-sm-12.buttons
+          a.btn.btn-small.btn-outline-primary(role="button", data-dismiss="modal", ng-if="!fromModal")
+            span.fa.fa-triangle-left
+            |  Volver
+          a.btn.btn-small.btn-outline-primary(role="button", ng-click="closeModal('departmentModal')", ng-if="fromModal")
+            span.fa.fa-triangle-left
+            |  Volver
+          span(ng-if="isView")
+            a.btn.btn-small.btn-primary(print-div=".print-form", print-div-type="form")
+              span.fa.fa-print
+              |  Imprimir
+          span(ng-if="!isView && !isNew")
+            a.btn.btn-small.btn-primary(ng-click="updateDepartment(departmentForm.$valid)", ng-disabled="departmentForm.$invalid", ng-if="menuCrude.indexOf('u')>=0")
+              span.fa.fa-save
+              |  Guardar
+          span(ng-if="(!isView && isNew)")
+            a.btn.btn-small.btn-primary(ng-click="addDepartment(departmentForm.$valid)", ng-disabled="departmentForm.$invalid", ng-if="menuCrude.indexOf('c')>=0")
+              span.fa.fa-save
+              |  Añadir

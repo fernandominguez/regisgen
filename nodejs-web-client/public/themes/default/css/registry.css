@@ -1,0 +1,76 @@
+.registry-stamp {
+  border: 2px solid rgb(133, 188, 245);
+  border-radius: 10px;
+  padding: 5px 10px;
+  position: relative;
+  text-align: center;
+  width: 450px;
+  margin: 0 auto;
+}
+.registry-stamp .registry-col {
+  float: left;
+  margin: 0 10px;
+  position: relative;
+}
+.registry-stamp .registry-col1 {
+  float: left;
+  margin: 0 10px;
+  position: relative;
+  width: 115px;
+}
+.registry-stamp .registry-col2 {
+  margin: 0 10px;
+  position: relative;
+}
+.registry-stamp .registry-logo {
+  border-right: 1px solid rgb(133, 188, 245);
+  margin: 10px 10px 0 0;
+  padding-right: 10px;
+}
+.registry-stamp .registry-logo img {
+  width: 100%;
+}
+.registry-stamp .registry-title {
+  border-bottom: 1px solid rgb(133, 188, 245);
+  border-top: 1px solid rgb(133, 188, 245);
+  color: rgb(133, 188, 245);
+  float: left;
+  font-size: 0.8em;
+  margin: 10px 0 5px 0;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  width: 265px;
+}
+.registry-stamp .registry-subtitle {
+  color: rgb(133, 188, 245);
+  font-size: 1em;
+  font-weight: bold;
+  margin: 5px 0;
+}
+.registry-stamp .registry-type {
+  font-size: 1.5em;
+  font-weight: bold;
+  padding: 5px 10px;
+  margin: 2px 0;
+}
+.registry-stamp .registry-label {
+  color: rgb(133, 188, 245);
+  font-size: 1.2em;
+  font-weight: bold;
+  margin-right: 5px;
+}
+.registry-stamp .registry-number,
+.registry-stamp .registry-date {
+  font-size: 1em;
+  font-weight: bold;
+}
+.registry-stamp .interna {
+  background-color: #eee;
+  color: #666;
+  border: 1px solid rgb(133, 188, 245);
+}
+.registry-stamp .externa {
+  background-color: #d1e6fc;
+  color: rgb(133, 188, 245);
+  border: 1px solid rgb(133, 188, 245);
+}

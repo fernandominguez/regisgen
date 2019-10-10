@@ -1,0 +1,61 @@
+version: "3.6"
+
+services:
+  mysql-server:
+    build:
+      context: ./mysql-server
+      dockerfile: Dockerfile
+    ports:
+      - "3306"
+    expose:
+      - "3306"
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - regisgen
+
+  nodejs-server:
+    build:
+      context: ./nodejs-server
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql-server
+    ports:
+      - "5000:5000"
+    expose:
+      - "5000"
+    volumes:
+      - ./nodejs-server:/opt/app:delegated
+      - ./nodejs-server/package.json:/opt/package.json
+      - ./nodejs-server/package-lock.json:/opt/package-lock.json
+      - notused-server:/opt/app/node_modules
+    networks:
+      - regisgen
+
+  nodejs-web-client:
+    build:
+      context: ./nodejs-web-client
+      dockerfile: Dockerfile
+    depends_on:
+      - nodejs-server
+    ports:
+      - "80:80"
+      - "9229:9229"
+    expose:
+      - "80"
+    volumes:
+      - ./nodejs-web-client:/opt/app:delegated
+      - ./nodejs-web-client/package.json:/opt/package.json
+      - ./nodejs-web-client/package-lock.json:/opt/package-lock.json
+      - notused-web-client:/opt/app/node_modules
+    networks:
+      - regisgen
+
+volumes:
+  db_data:
+  notused-server:
+  notused-web-client:
+
+networks:
+  regisgen:
+    driver: bridge
