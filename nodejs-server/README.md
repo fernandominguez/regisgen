@@ -20,7 +20,7 @@ Method: *GET*
 
 Parameters:
 
-- :credentials: *User login data (including locale for the messages system).*
+- `:credentials:` `User login data (including locale for the messages system)`
 
 ### [/api/department/:id](/api/department/:id)
 
@@ -30,7 +30,7 @@ Method: *DELETE*
 
 Parameters:
 
-- :id: *Department identifier. (including locale for the messages system)*
+- `:id:` `Department identifier. (including locale for the messages system)`
 
 ### [/api/department/:id](/api/department/:id)
 
@@ -40,7 +40,7 @@ Method: *GET*
 
 Parameters:
 
-- :id: *Department identifier. (including locale for the messages system)*
+- `:id:` `Department identifier. (including locale for the messages system)`
 
 ### [/api/department](/api/department)
 
@@ -50,7 +50,7 @@ Method: *POST*
 
 Received:
 
-- :data: *Data of the department (including locale for the messages system).*
+- `:data:` `Data of the department (including locale for the messages system)`
 
 ### [/api/department](/api/department)
 
@@ -60,7 +60,7 @@ Method: *PUT*
 
 Received:
 
-- :data: *Data of the department (including locale for the messages system).*
+- `:data:` `Data of the department (including locale for the messages system)`
 
 ### [/api/department/:id](/api/department/:id)
 
@@ -70,7 +70,7 @@ Method: *DELETE*
 
 Parameters:
 
-- :id: *Department identifier. (including locale for the messages system)*
+- `:id:` `Department identifier. (including locale for the messages system)`
 
 ### [/api/department/:id](/api/department/:id)
 
@@ -80,7 +80,7 @@ Method: *GET*
 
 Parameters:
 
-- :id: *Department identifier. (including locale for the messages system)*
+- `:id:` `Department identifier. (including locale for the messages system)`
 
 ### [/api/department](/api/department)
 
@@ -90,7 +90,7 @@ Method: *POST*
 
 Received:
 
-- :data: *Data of the department (including locale for the messages system).*
+- `:data:` `Data of the department (including locale for the messages system)`
 
 ### [/api/department](/api/department)
 
@@ -100,7 +100,7 @@ Method: *PUT*
 
 Received:
 
-- :data: *Data of the department (including locale for the messages system).*
+- `:data:` `Data of the department (including locale for the messages system)`
 
 ### [/api/file/:id](/api/file/:id)
 
@@ -110,7 +110,7 @@ Method: *DELETE*
 
 Parameters:
 
-- :id: *File identifier. (including locale for the messages system)*
+- `:id:` `File identifier. (including locale for the messages system)`
 
 ### [/api/file/:id](/api/file/:id)
 
@@ -120,7 +120,7 @@ Method: *GET*
 
 Parameters:
 
-- :id: *File identifier. (including locale for the messages system)*
+- `:id:` `File identifier. (including locale for the messages system)`
 
 ### [/api/file](/api/file)
 
@@ -130,7 +130,7 @@ Method: *POST*
 
 Received:
 
-- :data: *Data of the file (including locale for the messages system).*
+- `:data:` `Data of the file (including locale for the messages system)`
 
 ### [/api/file-download/:file](/api/file-download/:file)
 
@@ -140,7 +140,7 @@ Method: *GET*
 
 Received:
 
-- :file: *Identification data of the file. (incluiding locale for the messages system)*
+- `:file:` `Identification data of the file. (incluiding locale for the messages system)`
 
 ### [/api/file-upload](/api/file-upload)
 
@@ -150,7 +150,7 @@ Method: *POST*
 
 Parameters:
 
-- :stream: *Stream with the data ot the file. (incluiding locale for the messages system)*
+- `:stream:` `Stream with the data ot the file. (incluiding locale for the messages system)`
 
 ### [/api/departments/](/api/departments/)
 
@@ -166,7 +166,7 @@ Method: *DELETE*
 
 Parameters:
 
-- :id: *Menu identifier. (including locale for the messages system)*
+- `:id:` `Menu identifier. (including locale for the messages system)`
 
 ### [/api/menu/:id](/api/menu/:id)
 
@@ -176,7 +176,7 @@ Method: *GET*
 
 Parameters:
 
-- :id: *Menu identifier. (including locale for the messages system)*
+- `:id:` `Menu identifier. (including locale for the messages system)`
 
 ### [/api/menu](/api/menu)
 
@@ -186,7 +186,7 @@ Method: *POST*
 
 Received:
 
-- :data: *Data of the menu (including locale for the messages system).*
+- `:data:` `Data of the menu (including locale for the messages system)`
 
 ### [/api/menu](/api/menu)
 
@@ -196,7 +196,7 @@ Method: *PUT*
 
 Received:
 
-- :data: *Data of the menu (including locale for the messages system).*
+- `:data:` `Data of the menu (including locale for the messages system)`
 
 ### [/api/menus/](/api/menus/)
 
@@ -212,7 +212,7 @@ Method: *GET*
 
 Parameters:
 
-- :id: *Menu identifier. (including locale for the messages system)*
+- `:id:` `Menu identifier. (including locale for the messages system)`
 
 ### [/api/menu-crude/:menu/:role](/api/menu-crude/:menu/:role)
 
@@ -222,9 +222,9 @@ Method: *GET*
 
 Parameters:
 
-- :locale: *Locale for the messages system.*
-- :menu: *Menu identifier.*
-- :role: *Permission identifier.*
+- `:locale:` `Locale for the messages system`
+- `:menu:` `Menu identifier`
+- `:role:` `Permission identifier`
 
 ### [/api/permission/:id](/api/permission/:id)
 
@@ -234,7 +234,7 @@ Method: *DELETE*
 
 Parameters:
 
-- :id: *Permission identifier. (including locale for the messages system)*
+- `:id:` `Permission identifier. (including locale for the messages system)`
 
 ### [/api/permission/:id](/api/permission/:id)
 
@@ -244,7 +244,7 @@ Method: *GET*
 
 Parameters:
 
-- :id: *Permission identifier. (including locale for the messages system)*
+- `:id:` `Permission identifier. (including locale for the messages system)`
 
 ### [/api/permission](/api/permission)
 
@@ -254,7 +254,7 @@ Method: *POST*
 
 Received:
 
-- :data: *Data of the permission (including locale for the messages system).*
+- `:data:` `Data of the permission (including locale for the messages system)`
 
 ### [/api/permission](/api/permission)
 
@@ -264,7 +264,7 @@ Method: *PUT*
 
 Received:
 
-- :data: *Data of the permission (including locale for the messages system).*
+- `:data:` `Data of the permission (including locale for the messages system)`
 
 ### [/api/permissions/](/api/permissions/)
 
@@ -280,7 +280,7 @@ Method: *DELETE*
 
 Parameters:
 
-- :id: *Annotation identifier. (including locale for the messages system)*
+- `:id:` `Annotation identifier. (including locale for the messages system)`
 
 ### [/api/registry](/api/registry)
 
@@ -296,7 +296,7 @@ Method: *POST*
 
 Received:
 
-- data: *Data of the annotationr. (including locale for the messages system)*
+- `:data:` `Data of the annotationr. (including locale for the messages system)`
 
 ### [/api/registry](/api/registry)
 
@@ -306,7 +306,7 @@ Method: *PUT*
 
 Received:
 
-- :data: *Data of the annotationr (including locale for the messages system).*
+- `:data:` `Data of the annotationr (including locale for the messages system)`
 
 ### [/api/registry/:id](/api/registry/:id)
 
@@ -316,7 +316,7 @@ Method: *GET*
 
 Parameters:
 
-- :id: *Annotation identifier. (including locale for the messages system)*
+- `:id:` `Annotation identifier. (including locale for the messages system)`
 
 ### [/api/registry/scroll/:after/:cont](/api/registry/scroll/:after/:count)
 
@@ -326,9 +326,9 @@ Method: *GET*
 
 Parameters:
 
-- :after: *Identifier of the last annotation from where the registry list will be returned.*
-- :count: *Number of annotations to be returned.*
-- :locale: *Locale value for the messages system.*
+- `:after:` `Identifier of the last annotation from where the registry list will be returned`
+- `:count:` `Number of annotations to be returned`
+- `:locale:` `Locale value for the messages system`
 
 ### [/api/registry/search](/api/registry/search)
 
@@ -338,7 +338,7 @@ Method: *GET*
 
 Parameters:
 
-- :search: *Search values. (including locale for the messages system)*
+- `:search:` `Search values. (including locale for the messages system)`
 
 ### [/api/registry-files](/api/registry-files)
 
@@ -348,7 +348,7 @@ Method: *PUT*
 
 Parameters:
 
-- :data: *Data of the registry's files. (including locale for the messages system)*
+- `:data:` `Data of the registry's files. (including locale for the messages system)`
 
 ### [/api/registry-files/:id](/api/registry-files/:id)
 
@@ -358,7 +358,7 @@ Method: *GET*
 
 Parameters:
 
-- :id: *Identifier of the registry. (including locale for the messages system)*
+- `:id:` `Identifier of the registry. (including locale for the messages system)`
 
 ### [/api/thirdparty/:id](/api/thirdparty/:id)
 
@@ -368,7 +368,7 @@ Method: *DELETE*
 
 Parameters:
 
-- :id: *Thirdparty identifier. (including locale for the messages system)*
+- `:id:` `Thirdparty identifier. (including locale for the messages system)`
 
 ### [/api/thirdparty/:id](/api/thirdparty/:id)
 
@@ -378,7 +378,7 @@ Method: *GET*
 
 Parameters:
 
-- :id: *Thirdparty identifier. (including locale for the messages system)*
+- `:id:` `Thirdparty identifier. (including locale for the messages system)`
 
 ### [/api/thirdparty](/api/thirdparty)
 
@@ -388,7 +388,7 @@ Method: *POST*
 
 Received:
 
-- :data: *Data of the thirdparty (including locale for the messages system).*
+- `:data:` `Data of the thirdparty (including locale for the messages system)`
 
 ### [/api/thirdparty](/api/thirdparty)
 
@@ -398,7 +398,7 @@ Method: *PUT*
 
 Received:
 
-- :data: *Data of the thirdparty (including locale for the messages system).*
+- `:data:` `Data of the thirdparty (including locale for the messages system)`
 
 ### [/api/thirdparties/](/api/thirdparties/)
 
@@ -414,7 +414,7 @@ Method: *GET*
 
 Parameters:
 
-- :role: *Role identifier. (including locale for the messages system)*
+- `:role:` `Role identifier. (including locale for the messages system)`
 
 ### [/api/user](/api/user)
 
@@ -424,7 +424,7 @@ Method: *POST*
 
 Received:
 
-- data: *Data of the user. (including locale for the messages system)*
+- `:data:` `Data of the user. (including locale for the messages system)`
 
 ### [/api/user](/api/user)
 
@@ -434,7 +434,7 @@ Method: *PUT*
 
 Received:
 
-- :data: *Data of the user (including locale for the messages system).*
+- `:data:` `Data of the user (including locale for the messages system)`
 
 ### [/api/user/:id](/api/user/:id)
 
@@ -444,7 +444,7 @@ Method: *DELETE*
 
 Parameters:
 
-- :id: *User identifier. (including locale for the messages system)*
+- `:id:` `User identifier. (including locale for the messages system)`
 
 ### [/api/user/:id](/api/user/:id)
 
@@ -454,7 +454,7 @@ Method: *GET*
 
 Parameters:
 
-- :id: *Identifier of the user. (including locale for the messages system)*
+- `:id:` `Identifier of the user. (including locale for the messages system)`
 
 ### [/api/user/:id/:role](/api/user/:id/:role)
 
@@ -464,7 +464,7 @@ Method: *GET*
 
 Parameters:
 
-- :role: *Role of the user. (including locale for the messages system)*
+- `:role:` `Role of the user. (including locale for the messages system)`
 
 ### [/api/users/](/api/users/)
 
@@ -476,11 +476,11 @@ Method: *GET*
 
 Updates the permissions for the user from the data received.
 
-Method: *PUT*
+Method:` `PUT*
 
 Received:
 
-- :data: *Data of the user's permissions (including locale for the messages system).*
+- `:data:` `Data of the user's permissions (including locale for the messages system)`
 
 ### [/api/user-permissions/:id](/api/user-permissions/:id)
 
@@ -490,7 +490,7 @@ Method: *GET*
 
 Parameters:
 
-- :id: *Identifier of the user (including locale for the messages system).*
+- `:id:` `Identifier of the user (including locale for the messages system)`
 
 ### [/api/user-roles/:id](/api/user-roles/:id)
 
@@ -500,7 +500,7 @@ Method: *GET*
 
 Parameters:
 
-- :id: *Identifier of the user (including locale for the messages system).*
+- `:id:` `Identifier of the user (including locale for the messages system)`
 
 ## License:
 
