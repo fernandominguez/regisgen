@@ -38,6 +38,14 @@ a:hover {
   color: #007bff;
   text-decoration: underline;
 }
+code {
+  color: white;;
+  background-color: #bbb;
+  padding: 0.2em 0.3em;
+  -moz-border-radius: 0.25rem;
+  -webkit-border-radius: 0.25rem;
+  border-radius: 0.25rem;
+}
 p {
   margin: 0.5em 0;
 }
@@ -53,4 +61,5 @@ ul > li {
 }
 ul > li > em {
   color: #888888;
+  vertical-align: middle;
 }
