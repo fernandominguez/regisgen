@@ -7,6 +7,9 @@ Lang.message = (message, req, res) => {
   let defaultLocale =
     res && res.getLocale() ? res.getLocale() : config.DEFAULT_LOCALE;
   let locale = defaultLocale;
+  if (req && !req.query && !req.params && !req.cookies) {
+    locale = req;
+  }
   if (req && req.query && req.query.locale) {
     locale = req.query.locale;
   }
