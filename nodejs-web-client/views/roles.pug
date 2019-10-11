@@ -12,13 +12,13 @@ html
               input(type='hidden' name='username' value=username)
               input(type='hidden' name='password' value=password)
               div.form-group.text-center
-                label(for="role")
-                  | Escoge tu rol para continuar:
+                label(for="role")= lblRole
+                  | :
                 select#selectRole.selectpicker(name="role", multiple, data-max-options="1")
                   - for (var i=0; i<roles.length; i++)
                     option(value=roles[i].id)
                       | #{ roles[i].name }
-              button(class='btn btn-lg btn-primary btn-block' type='submit') Seleccionar
+              button(class='btn btn-lg btn-primary btn-block' type='submit')=btnSelect
               span.clearfix
 
       if (flashMessage && flashMessage.length)

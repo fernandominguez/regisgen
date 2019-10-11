@@ -1,5 +1,6 @@
 {
 	"App Title": "Registro General",
+	"btnSelect": "Seleccionar",
 	"Error 401": "El token ha expirado",
 	"Error 403": "Tu petición no tiene cabecera de autorización",
 	"Error Departments 001": "Error departments.findById",
@@ -175,6 +176,7 @@
 	"Error Users 041": "Error users.validate - Llamada no válida",
 	"Language": "English",
 	"Listening at": "Escuchando en",
+	"lblRole": "Escoge tu rol para continuar",
 	"phAddress": "Dirección postal",
 	"phBirthday": "Fecha de nacimiento",
 	"phEmail": "Email",

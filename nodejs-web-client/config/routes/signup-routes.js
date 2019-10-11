@@ -41,6 +41,8 @@ module.exports = app => {
                 title: lang.message("App Title", req, res),
                 username: req.user ? req.user.username : undefined,
                 password: req.user ? req.user.password : undefined,
+                lblRole: lang.message("lblRole", locale, res),
+                btnSelect: lang.message("btnSelect", locale, res),
                 roles: data.data,
                 flashMessage: req.flash("flashMessage")
               });

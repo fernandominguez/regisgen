@@ -1,5 +1,6 @@
 {
   "App Title": "General Registry",
+  "btnSelect": "Select",
   "Error 401": "Token expired",
   "Error 403": "Missing request authorization header",
   "Error Departments 001": "Error departments.findById",
@@ -175,6 +176,7 @@
   "Error Users 041": "Error users.validate - Invalid call",
   "Language": "Español",
   "Listening at": "Listening at",
+  "lblRole": "Choose your role to continue",
   "phAddress": "Address",
   "phBirthday": "Date of birth",
   "phEmail": "Email",
