@@ -10,7 +10,13 @@ let Files = function() {};
 Files.clear = (req, res) => {
   extrafs.emptyDir(config.UPLOAD_DIR, err => {
     if (!err) {
-      res.status(200).send(true);
+      extrafs.emptyDir(config.DOWNLOAD_DIR, err => {
+        if (!err) {
+          res.status(200).send(true);
+        } else {
+          res.status(500).send({ message: err.message });
+        }
+      });
     } else {
       res.status(500).send({ message: err.message });
     }
