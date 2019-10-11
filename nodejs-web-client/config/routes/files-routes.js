@@ -18,4 +18,8 @@ module.exports = app => {
   app.post("/files/:data", passport.authenticationMiddleware(), (req, res) => {
     files.uploadToServer(req, res);
   });
+
+  app.put("/files/:data", passport.authenticationMiddleware(), (req, res) => {
+    files.clear(req, res); 
+  });
 };

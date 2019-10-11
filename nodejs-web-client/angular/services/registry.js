@@ -19,7 +19,8 @@ services.factory("NoteFactory", function ($resource) {
     }),
     files: $resource("/files/:id/:data", {}, {
       list: { method: "GET", params: { id: "@id" } },
-      upload: { method: "POST", params: { data: "@data" } }
+      upload: { method: "POST", params: { data: "@data" } },
+      clear: { method: "PUT", params: { data: "@data" } }
     })
   };
 });

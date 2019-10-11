@@ -2,9 +2,20 @@ let config = require("../config");
 let axios = require("axios");
 let crypto = require("crypto");
 let fs = require("fs");
+let extrafs = require("fs-extra");
 let i18n = require("i18n");
 
 let Files = function() {};
+
+Files.clear = (req, res) => {
+  extrafs.emptyDir(config.UPLOAD_DIR, err => {
+    if (!err) {
+      res.status(200).send(true);
+    } else {
+      res.status(500).send({ message: err.message });
+    }
+  });
+};
 
 Files.download = (req, res) => {
   var file = JSON.parse(req.params.file);

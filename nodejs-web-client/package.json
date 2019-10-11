@@ -24,6 +24,7 @@
     "dateformat": "^3.0.3",
     "express": "^4.17.1",
     "express-session": "1.16.2",
+    "fs-extra": "8.1.0",
     "i18n": "0.8.3",
     "jwt-simple": "0.5.6",
     "moment": "2.24.0",

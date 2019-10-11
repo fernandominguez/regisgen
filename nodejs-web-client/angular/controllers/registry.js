@@ -390,8 +390,11 @@ app.controller("RegistryListCtrl", [
         );
       }
     };
+    $("#noteModal").on("hide.bs.modal", function() {
+      $scope.closeModal();
+    });
     $scope.closeModal = function(modal) {
-      $("#" + modal).modal("hide");
+      $scope.clearTmpFiles();
       $scope.fromModal = false;
     };
     $scope.filter = function() {
@@ -403,21 +406,26 @@ app.controller("RegistryListCtrl", [
       $scope.predicate = predicate;
       $scope.reverse = !$scope.reverse;
     };
+    $scope.clearTmpFiles = function() {
+      NoteFactory.files.clear({ data: {} });
+    };
     $scope.downloadFile = function(file, noteId) {
-      file.download = NoteFactory.file.download(
-        {
-          file: JSON.stringify({
-            id: file.id,
-            noteId: noteId,
-            name: file.name
-          })
-        },
-        function(res) {
-          $timeout(() => {
-            window.open(file.download.file);
-          });
-        }
-      );
+      if (!$scope.isNew) {
+        file.download = NoteFactory.file.download(
+          {
+            file: JSON.stringify({
+              id: file.id,
+              noteId: noteId,
+              name: file.name
+            })
+          },
+          function(res) {
+            $timeout(() => {
+              window.open(file.download.file);
+            });
+          }
+        );
+      }
     };
     $scope.uploadFiles = function(files, errFiles) {
       $scope.tmpFiles = files;
