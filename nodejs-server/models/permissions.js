@@ -19,8 +19,8 @@ Permission.create = (data, req, res) => {
   return new Promise((resolve, reject) => {
     Permission.validate(data, Permission.prototype.calls.create, req, res)
       .then(() => {
-        var sql = " INSERT INTO ?? (name) VALUES (?) ";
-        var values = [Permission.prototype.table, data.name];
+        var sql = " INSERT INTO ?? (name, lang) VALUES (?, ?) ";
+        var values = [Permission.prototype.table, data.name, lang.getLocale(req, res)];
         db.query(sql, values)
           .then(rows => {
             var permissionId = rows.insertId;
@@ -143,10 +143,10 @@ Permission.findById = (id, req, res) => {
   });
 };
 
-Permission.list = () => {
+Permission.list = (req, res) => {
   return new Promise((resolve, reject) => {
-    var sql = " SELECT * FROM ?? ";
-    var values = [Permission.prototype.table];
+    var sql = " SELECT * FROM ?? WHERE lang = ? ";
+    var values = [Permission.prototype.table, lang.getLocale(req, res)];
     db.query(sql, values)
       .then(rows => {
         return resolve(rows);
@@ -161,8 +161,8 @@ Permission.update = (data, req, res) => {
   return new Promise((resolve, reject) => {
     Permission.validate(data, Permission.prototype.calls.update, req, res)
       .then(() => {
-        var sql = " UPDATE ?? SET name = ?  WHERE id = ? ";
-        var values = [Permission.prototype.table, data.name, data.id];
+        var sql = " UPDATE ?? SET name = ? WHERE id = ? AND lang = ? ";
+        var values = [Permission.prototype.table, data.name, data.id, lang.getLocale(req, res)];
         db.query(sql, values)
           .then(rows => {
             var sql = " DELETE  FROM ?? WHERE `id-permission` = ? ";

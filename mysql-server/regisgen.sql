@@ -29,27 +29,38 @@ CREATE TABLE `regisgen`.`menus` (
   `icon` VARCHAR(45) NOT NULL,
   `href` VARCHAR(255) NOT NULL,
   `order` INT NOT NULL,
+  `lang` VARCHAR(5) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `order_UNIQUE` (`order` ASC)
+  UNIQUE INDEX `order_UNIQUE` (`lang` ASC, `order` ASC)
 );
 
-INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`) VALUES (0, 'user-menu', 'user-circle', '#!', 100);
-INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`) VALUES (0, 'Registry book', 'inbox', '#!/registry', 200);
-INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`) VALUES (0, 'Configuration', 'cog', '#!', 300);
-INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`) VALUES (0, 'Users', 'users', '#!/config/users', 310);
-INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`) VALUES (0, 'Menus permissions', 'flash', '#!/config/permissions', 320);
-INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`) VALUES (0, 'Menus', 'ellipsis-v', '#!/config/menus', 330);
-INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`) VALUES (0, 'Log out', 'power-off', '#!/logout', 999);
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'user-menu', 'user-circle', '#!', 100, 'en');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'user-menu', 'user-circle', '#!', 100, 'es');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'Registry Book', 'inbox', '#!/registry', 200, 'en');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'Libro de Registro', 'inbox', '#!/registry', 200, 'es');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'Configuration', 'cog', '#!', 300, 'en');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'Configuración', 'cog', '#!', 300, 'es');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (5, 'Users', 'users', '#!/config/users', 310, 'en');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (6, 'Usuarios', 'users', '#!/config/users', 310, 'es');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (5, 'Menus permissions', 'flash', '#!/config/permissions', 320, 'en');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (6, 'Permisos de Menús', 'flash', '#!/config/permissions', 320, 'es');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (5, 'Menus', 'ellipsis-v', '#!/config/menus', 330, 'en');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (6, 'Menús', 'ellipsis-v', '#!/config/menus', 330, 'es');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'Log out', 'power-off', '#!/logout', 999, 'en');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'Salir', 'power-off', '#!/logout', 999, 'es');
 
 CREATE TABLE `regisgen`.`permissions` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
+  `lang` VARCHAR(5) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `name_UNIQUE` (`name` ASC)
+  UNIQUE INDEX `name_UNIQUE` (`lang` ASC, `name` ASC)
 );
 
-INSERT INTO `regisgen`.`permissions` (`name`) VALUES ('Administrator');
-INSERT INTO `regisgen`.`permissions` (`name`) VALUES ('User');
+INSERT INTO `regisgen`.`permissions` (`name`, `lang`) VALUES ('Administrator', 'en');
+INSERT INTO `regisgen`.`permissions` (`name`, `lang`) VALUES ('Administrador', 'es');
+INSERT INTO `regisgen`.`permissions` (`name`, `lang`) VALUES ('User', 'en');
+INSERT INTO `regisgen`.`permissions` (`name`, `lang`) VALUES ('Usuario', 'es');
 
 CREATE TABLE `regisgen`.`permissions-menus` (
   `id-permission` INT NOT NULL,
@@ -65,9 +76,19 @@ INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`)
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 5, 'crude');
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 6, 'crude');
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 7, 'crude');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 8, 'crude');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 9, 'crude');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 10, 'crude');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 11, 'crude');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 12, 'crude');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 13, 'crude');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 14, 'crude');
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 1, 'cre');
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 2, 'cre');
-INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 7, 'cre');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 3, 'cre');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 4, 'cre');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 13, 'cre');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 14, 'cre');
 
 CREATE TABLE `regisgen`.`users-permissions` (
   `id-user` INT NOT NULL,
@@ -76,6 +97,7 @@ CREATE TABLE `regisgen`.`users-permissions` (
 );
 
 INSERT INTO `regisgen`.`users-permissions` (`id-user`,`id-permission`) VALUES (1, 1);
+INSERT INTO `regisgen`.`users-permissions` (`id-user`,`id-permission`) VALUES (1, 2);
 
 CREATE OR REPLACE VIEW `regisgen`.`v-user-menus` AS
   SELECT DISTINCT
@@ -85,6 +107,7 @@ CREATE OR REPLACE VIEW `regisgen`.`v-user-menus` AS
     m.`icon`   AS menuIcon,
     m.`href`   AS menuHref,
     m.`order`  AS menuOrder,
+    m.`lang`   AS menuLang,
     pm.`crude` AS permissionCrude,
     u.`id`     AS userId,
     p.`id`     AS permissionId
@@ -100,6 +123,7 @@ CREATE OR REPLACE VIEW `regisgen`.`v-menus-tree` AS
     c.`name` AS childName,
     c.`icon` AS childIcon,
     c.`href` AS childHref,
+    c.`lang` AS childLang,
     p.`id`   AS parentId,
     CASE
       WHEN p.`order` IS NULL THEN c.`order` * 10

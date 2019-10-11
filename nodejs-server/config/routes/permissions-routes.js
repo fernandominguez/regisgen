@@ -48,7 +48,7 @@ module.exports = app => {
 
   app.get("/api/permissions", auth.authenticate, (req, res) => {
     permissions
-      .list()
+      .list(req, res)
       .then(rows => {
         res.status(200).json(rows);
       })

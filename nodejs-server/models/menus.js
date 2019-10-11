@@ -44,14 +44,15 @@ Menu.create = (data, req, res) => {
     Menu.validate(data, Menu.prototype.calls.create, req, res)
       .then(() => {
         var sql =
-          " INSERT INTO ?? (parent, name, icon, href, `order`) VALUES (?, ?, ?, ?, ?) ";
+          " INSERT INTO ?? (parent, name, icon, href, `order`, lang) VALUES (?, ?, ?, ?, ?, ?) ";
         var values = [
           Menu.prototype.table,
           data.parent,
           data.name,
           data.icon,
           data.href,
-          data.order
+          data.order,
+          lang.getLocale(req, res),
         ];
         db.query(sql, values)
           .then(rows => {
@@ -72,8 +73,8 @@ Menu.crude = (id, role, req, res) => {
     Menu.validate({ id: id }, Menu.prototype.calls.crude, req, res)
       .then(() => {
         var sql =
-          " SELECT `crude` FROM `v-menus-tree` WHERE `childId` = ? AND `role` = ? ";
-        var values = [id, role];
+          " SELECT `crude` FROM `v-menus-tree` WHERE `childId` = ? AND `role` = ? AND `childLang`= ?";
+        var values = [id, role, lang.getLocale(req, res)];
         db.query(sql, values)
           .then(rows => {
             return resolve(rows);
@@ -127,7 +128,7 @@ Menu.findById = (id, req, res) => {
     Menu.validate({ id: id }, Menu.prototype.calls.findById, req, res)
       .then(() => {
         var sql =
-          " SELECT a.id, a.parent, b.name as parentName, b.icon as parentIcon, a.name, a.icon, a.href, a.`order` FROM ?? a LEFT OUTER JOIN ?? b ON b.id = a.parent WHERE a.id = ? ";
+          " SELECT a.id, a.parent, b.name as parentName, b.icon as parentIcon, a.name, a.icon, a.href, a.`order`, a.lang FROM ?? a LEFT OUTER JOIN ?? b ON b.id = a.parent WHERE a.id = ? ";
         var values = [Menu.prototype.table, Menu.prototype.table, id];
         db.query(sql, values)
           .then(rows => {
@@ -147,8 +148,8 @@ Menu.findOthers = (id, req, res) => {
   return new Promise((resolve, reject) => {
     Menu.validate({ id: id }, Menu.prototype.calls.findOthers, req, res)
       .then(() => {
-        var sql = " SELECT id, name, icon FROM ?? WHERE id != ? ";
-        var values = [Menu.prototype.table, id];
+        var sql = " SELECT `id`, `name`, `icon` FROM ?? WHERE `id` != ? AND lang = ? ";
+        var values = [Menu.prototype.table, id, lang.getLocale(req, res)];
         db.query(sql, values)
           .then(rows => {
             return resolve(rows);
@@ -167,8 +168,8 @@ Menu.findTree = (role, req, res) => {
   return new Promise((resolve, reject) => {
     Menu.validate({ role: role }, Menu.prototype.calls.findTree, req, res)
       .then(() => {
-        var sql = " SELECT * FROM ??  WHERE `role` = ? ";
-        var values = [Menu.prototype.view, role];
+        var sql = " SELECT * FROM ?? WHERE `role` = ? AND `childLang` = ? ";
+        var values = [Menu.prototype.view, role, lang.getLocale(req, res)];
         db.query(sql, values)
           .then(rows => {
             return resolve(rows);
@@ -183,11 +184,11 @@ Menu.findTree = (role, req, res) => {
   });
 };
 
-Menu.list = () => {
+Menu.list = (req, res) => {
   return new Promise((resolve, reject) => {
     var sql =
-      " SELECT a.id, b.name as parentName, a.name, a.icon, a.href, a.`order` FROM ?? a LEFT OUTER JOIN ?? b ON b.id = a.parent ";
-    var values = [Menu.prototype.table, Menu.prototype.table];
+      " SELECT a.id, b.name as parentName, a.name, a.icon, a.href, a.`order` FROM ?? a LEFT OUTER JOIN ?? b ON b.id = a.parent WHERE a.lang = ? ";
+    var values = [Menu.prototype.table, Menu.prototype.table, lang.getLocale(req, res)];
     db.query(sql, values)
       .then(rows => {
         return resolve(rows);
@@ -230,7 +231,7 @@ Menu.update = (data, req, res) => {
     Menu.validate(data, Menu.prototype.calls.update, req, res)
       .then(() => {
         var sql =
-          " UPDATE ?? SET parent = ?, name = ?, icon = ?, href = ?, `order` = ? WHERE id = ? ";
+          " UPDATE ?? SET parent = ?, name = ?, icon = ?, href = ?, `order` = ? WHERE id = ? AND lang = ? ";
         var values = [
           Menu.prototype.table,
           data.parent,
@@ -238,7 +239,8 @@ Menu.update = (data, req, res) => {
           data.icon,
           data.href,
           data.order,
-          data.id
+          data.id,
+          lang.getLocale(req, res)
         ];
         db.query(sql, values)
           .then(rows => {

@@ -59,7 +59,7 @@ module.exports = app => {
 
   app.get("/api/menus/", auth.authenticate, (req, res) => {
     menus
-      .list()
+      .list(req, res)
       .then(rows => {
         res.status(200).json(rows);
       })
