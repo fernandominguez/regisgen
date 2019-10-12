@@ -3,10 +3,12 @@ let i18n = require("i18n");
 
 let Lang = function() {};
 
+Lang.getDefaultLocale = (req, res) => {
+  return res && res.getLocale() ? res.getLocale() : config.DEFAULT_LOCALE;
+};
+
 Lang.getLocale = (req, res) => {
-  var defaultLocale =
-    res && res.getLocale() ? res.getLocale() : config.DEFAULT_LOCALE;
-  var locale = defaultLocale;
+  var locale = Lang.getDefaultLocale(req, res);
   if (req && !req.query && !req.params) {
     locale = req;
   }
@@ -22,7 +24,7 @@ Lang.getLocale = (req, res) => {
 Lang.message = (message, req, res) => {
   i18n.setLocale(Lang.getLocale(req, res));
   var msg = i18n.__(message);
-  i18n.setLocale(defaultLocale);
+  i18n.setLocale(Lang.getDefaultLocale(req, res));
   return msg;
 };
 

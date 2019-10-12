@@ -126,13 +126,14 @@ User.findByIdAndRole = (id, role, req, res) => {
     )
       .then(() => {
         var sql =
-          " SELECT u.`id`, u.`username`, u.`name`, u.`surname`, u.`email`, u.`phone`, u.`mobile`, u.`address`, u.`birthday`, p.`id` roleId, p.`name` roleName FROM ?? u LEFT JOIN ?? up ON u.`id` = up.`id-user` LEFT JOIN ?? p ON up.`id-permission` = p.`id` WHERE u.`id` = ? AND p.`id` = ? ";
+          " SELECT u.`id`, u.`username`, u.`name`, u.`surname`, u.`email`, u.`phone`, u.`mobile`, u.`address`, u.`birthday`, p.`id` roleId, p.`name` roleName FROM ?? u LEFT JOIN ?? up ON u.`id` = up.`id-user` LEFT JOIN ?? p ON up.`id-permission` = p.`id` WHERE u.`id` = ? AND p.`id` = ? AND p.`lang` = ? ";
         var values = [
           User.prototype.table,
           User.prototype.table_permissions,
           permissions.prototype.table,
           id,
-          role
+          role,
+          lang.getLocale(req, res)
         ];
         db.query(sql, values)
           .then(rows => {
@@ -198,11 +199,12 @@ User.findRoles = (id, req, res) => {
     User.validate({ id: id }, User.prototype.calls.findRoles, req, res)
       .then(() => {
         var sql =
-          " SELECT a.`id`, a.`name` FROM ?? a LEFT JOIN ?? b ON a.`id` = b.`id-permission` WHERE b.`id-user` = ? ";
+          " SELECT a.`id`, a.`name` FROM ?? a LEFT JOIN ?? b ON a.`id` = b.`id-permission` WHERE b.`id-user` = ? AND a.`lang` = ? ";
         var values = [
           permissions.prototype.table,
           User.prototype.table_permissions,
-          id
+          id,
+          lang.getLocale(req, res)
         ];
         db.query(sql, values)
           .then(rows => {
@@ -248,7 +250,7 @@ User.update = (data, req, res) => {
           data.phone,
           data.mobile,
           data.address,
-          (data.newpassword ? data.newpassword : data.password),
+          data.newpassword ? data.newpassword : data.password,
           dateformat(moment(data.birthday, "YYYY-MM-DD"), "yyyy-mm-dd"),
           data.id
         ];
