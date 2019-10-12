@@ -1,12 +1,12 @@
 p(ng-message="required")
-  |  Obligatorio.
+  |  {{msgRequired}}.
 p(ng-message="minlength")
-  |  Demasiado corto.
+  |  {{msgTooShort}}.
 p(ng-message="maxlength")
-  |  Demasiado largo.
+  |  {{msgTooLarge}}.
 p(ng-message="email")
-  |  Email no válido.
+  |  {{msgInvalidEmail}}.
 p(ng-message="pattern")
-  |  Número no válido.
+  |  {{msgInvalidNumber}}.
 p(ng-message="password")
-  |  No coinciden.
+  |  {{msgDoNotMatch}}.
