@@ -114,6 +114,7 @@ module.exports = function(app) {
         titlePrintList: lang.message("titlePrintList", req, res),
         titleShowData: lang.message("titleShowData", req, res),
         titleUserPermissions: lang.message("titleUserPermissions", req, res),
+        titleUsersPerPage: lang.message("titleUsersPerPage", req, res),
         thEmail: lang.message("thEmail", req, res),
         thMobile: lang.message("thMobile", req, res),
         thName: lang.message("thName", req, res),

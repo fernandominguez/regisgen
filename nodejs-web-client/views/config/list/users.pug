@@ -5,7 +5,7 @@ div.container-fluid.xyz(ng-if="menuCrude.indexOf('e')>=0", ng-controller="UserLi
         input.form-control(type="text", ng-model="search", ng-change="filter()", placeholder=phSearch)
         i(class='form-control-feedback fa fa-search')
     div.col-md-1
-      select#selectPages.selectpicker(ng-model="entryLimit", multiple, data-max-options="1", title="Usuarios por página ...")
+      select#selectPages.selectpicker(ng-model="entryLimit", multiple, data-max-options="1", title=titleUsersPerPage)
         option(value="10")
           | 10 
           = msgUsersPerPage
