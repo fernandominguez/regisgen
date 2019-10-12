@@ -2,39 +2,38 @@ div.modal-content.panel.panel-danger
   div.modal-header
     div.panel-title
       span(ng-if="isNew")
-        |  Nuevo Usuario
+        |  
+        = msgNewUser
       span(ng-if="!isNew")
         span.fa.fa-user
         |  {{user.username}}
-      a.close.btn.btn-small.btn-outline-primary(type="button", aria-label="Close", data-dismiss="modal")
+      a.close.btn.btn-small.btn-outline-primary(type="button", aria-label=btnClose, data-dismiss="modal")
         span(aria-hidden="true")
           | &times;
   div.modal-body.print-form
     form.form-horizontal.col-xs-12.col-sm-12.col-md-offset-1.col-xs-offset-1(name="userForm", novalidate="novalidate")
       div.form-group(ng-show="isNew")
         div.col-sm-12(ng-class="{ 'has-error': userForm.username.$invalid && userForm.username.$dirty }")
-          label.text-nowrap(for="inputUserName")
-            | Nombre de Usuario
+          label.text-nowrap(for="inputUserName")=lblUserName
           input#inputUserName.form-control(name="username", type="text", ng-model="user.username", required, ng-maxlength="37", ng-minlength="6")
           div.help-block(ng-messages="userForm.username.$error" ng-if="userForm.username.$invalid && userForm.username.$dirty")
             include ../../messages.pug
       div.form-group
         div.col-sm-4(ng-class="{ 'has-error': (!isNew && userForm.name.$invalid) || (isNew && userForm.name.$invalid && userForm.name.$dirty) }")
-          label.text-nowrap(for="inputFirstName")
-            | Nombre
+          label.text-nowrap(for="inputFirstName")=lblName
           input#inputFirstName.form-control(name="name", type="text", ng-model="user.name", required, ng-disabled="isView", ng-minlength="3", ng-maxlength="45")
           div.help-block(ng-messages="userForm.name.$error" ng-if="(!isNew && userForm.name.$invalid) || (isNew && userForm.name.$invalid && userForm.name.$dirty)")
             include ../../messages.pug
         div.col-sm-8(ng-class="{ 'has-error': (!isNew && userForm.surname.$invalid) || (isNew && userForm.surname.$invalid && userForm.surname.$dirty) }")
-          label.text-nowrap(for="inputLastName")
-            | Apellidos
+          label.text-nowrap(for="inputLastName")=lblSurname
           input#inputLastName.form-control(name="surname", type="text", ng-model="user.surname", required, ng-disabled="isView", ng-minlength="3", ng-maxlength="45")
           div.help-block(ng-messages="userForm.surname.$error" ng-if="(!isNew && userForm.surname.$invalid) || (isNew && userForm.surname.$invalid && userForm.surname.$dirty)")
             include ../../messages.pug
       div.form-group
         div.col-sm-4(ng-class="{ 'has-error': (!isNew && userForm.birthday.$invalid) || (isNew && userForm.birthday.$invalid && userForm.birthday.$dirty) }")
           label.text-nowrap(for="inputBirthday")
-            |  Fecha de Nacimiento
+            |  
+            = lblBirthday
           div.input-group.date(data-provide="datepicker", data-date-format="dd/mm/yyyy", data-date-language="es", data-date-orientation="bottom auto", data-date-today-btn="true", data-date-today-highlight="true")
             span.input-group-addon
               i.fa.fa-calendar
@@ -44,7 +43,8 @@ div.modal-content.panel.panel-danger
         div.col-sm-8(ng-class="{ 'has-error': (!isNew && userForm.address.$invalid) || (isNew && userForm.address.$invalid && userForm.address.$dirty) }")
           label.text-nowrap(for="inputAddress")
             span.fa.fa-map-marker
-            |  Dirección
+            |  
+            = lblAddress
           input#inputAddress.form-control(name="address", type="text", ng-model="user.address", required, ng-disabled="isView", ng-maxlength="255", ng-minlength="10")
           div.help-block(ng-messages="userForm.address.$error" ng-if="(!isNew && userForm.address.$invalid) || (isNew && userForm.address.$invalid && userForm.address.$dirty)")
             include ../../messages.pug
@@ -52,21 +52,24 @@ div.modal-content.panel.panel-danger
         div.col-sm-6(ng-class="{ 'has-error': (!isNew && userForm.email.$invalid) || (isNew && userForm.email.$invalid && userForm.email.$dirty) }")
           label.text-nowrap(for="inputEmail")
             span.fa.fa-envelope
-            |  Email
+            |  
+            = lblEmail
           input#inputEmail.form-control(name="email", type="email", ng-model="user.email", required, ng-disabled="isView", ng-maxlength="255")
           div.help-block(ng-messages="userForm.email.$error" ng-if="(!isNew && userForm.email.$invalid) || (isNew && userForm.email.$invalid && userForm.email.$dirty)")
             include ../../messages.pug
         div.col-sm-3(ng-class="{ 'has-error': (!isNew && userForm.phone.$invalid) || (isNew && userForm.phone.$invalid && userForm.phone.$dirty) }")
           label.text-nowrap(for="inputPhone")
             span.fa.fa-phone
-            |  Fijo
+            |  
+            = lblPhone
           input#inputPhone.form-control.text-center(name="phone", type="text", ng-model="user.phone", required, ng-disabled="isView", ng-maxlength="9", ng-minlength="9", ng-pattern="/^\[0-9]{9}$/")
           div.help-block(ng-messages="userForm.phone.$error" ng-if="(!isNew && userForm.phone.$invalid) || (isNew && userForm.phone.$invalid && userForm.phone.$dirty)")
             include ../../messages.pug
         div.col-sm-3(ng-class="{ 'has-error': (!isNew && userForm.mobile.$invalid) || (isNew && userForm.mobile.$invalid && userForm.mobile.$dirty) }")
           label.text-nowrap(for="inputMobile")
             span.fa.fa-mobile
-            |  Móvil
+            |  
+            = lblMobile
           input#inputMobile.form-control.text-center(name="mobile", type="phone", ng-model="user.mobile", required, ng-disabled="isView", ng-maxlength="9", ng-minlength="9", ng-pattern="/^\[0-9]{9}$/")
           div.help-block(ng-messages="userForm.mobile.$error" ng-if="(!isNew && userForm.mobile.$invalid) || (isNew && userForm.mobile.$invalid && userForm.mobile.$dirty)")
             include ../../messages.pug
@@ -74,13 +77,15 @@ div.modal-content.panel.panel-danger
         div.col-sm-6(ng-class="{ 'has-error': (!isNew && userForm.newpassword.$invalid || userForm.repassword.$invalid) || (isNew && userForm.password.$invalid && userForm.password.$dirty) || (isNew && userForm.repassword.$invalid && userForm.repassword.$dirty) }")
           label.text-nowrap(for="inputPassword")
             span.fa.fa-lock
-            |  Contraseña
+            |  
+            = lblPassword
           input#inputNewPassword.form-control(name="newpassword", type="password", ng-model="user.newpassword", ng-maxlength="16", ng-minlength="6")
           div.help-block(ng-messages="userForm.newpassword.$error || userForm.repassword.$error" ng-if="(!isNew && userForm.newpassword.$invalid || userForm.repassword.$invalid) || (isNew && userForm.password.$invalid && userForm.password.$dirty) || (isNew && userForm.repassword.$invalid && userForm.repassword.$dirty)")
             include ../../messages.pug
         div.col-sm-6(ng-class="{ 'has-error': (!isNew && userForm.repassword.$invalid) || (isNew && userForm.repassword.$invalid && userForm.repassword.$dirty) }")
           label.text-nowrap(for="inputRePassword")
-            |  Repetir Contraseña
+            |  
+            = lblRePassword
           input#inputRePassword.form-control(name="repassword", type="password", ng-model="user.repassword", ng-maxlength="16", ng-minlength="6", confirm-pwd="user.newpassword")
           div.help-block(ng-messages="userForm.repassword.$error" ng-if="(!isNew && userForm.repassword.$invalid) || (isNew && userForm.repassword.$invalid && userForm.repassword.$dirty)")
             include ../../messages.pug
@@ -96,19 +101,24 @@ div.modal-content.panel.panel-danger
         div.col-sm-12.buttons
           a.btn.btn-small.btn-outline-primary(data-dismiss="modal")
             span.fa.fa-triangle-left
-            |  Volver
+            |  
+            = btnReturn
           span(ng-if="isView")
             a.btn.btn-small.btn-primary(print-div=".print-form", print-div-type="form")
               span.fa.fa-print
-              |  Imprimir
+              |  
+              = btnPrint
           span(ng-if="!isView && !isNew")
             a.btn.btn-small.btn-primary(ng-click="updateUser(userForm.$valid)", ng-disabled="userForm.$invalid", ng-if="menuCrude.indexOf('u')>=0")
               span.fa.fa-save
-              |  Guardar
+              |  
+              = btnSave
             a.btn.btn-small.btn-primary(ng-click="deleteUser()", ng-if="menuCrude.indexOf('d')>=0")
               span.fa.fa-trash
-              |  Borrar
+              |  
+              = btnDelete
           span(ng-if="!isView && isNew")
             a.btn.btn-small.btn-primary(ng-click="addUser(userForm.$valid)", ng-disabled="userForm.$invalid", ng-if="menuCrude.indexOf('c')>=0")
               span.fa.fa-save
-              |  Añadir
+              |  
+              = btnAdd

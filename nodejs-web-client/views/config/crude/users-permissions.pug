@@ -2,8 +2,10 @@ div.modal-content.panel.panel-danger
   div.modal-header
     div.panel-title
       span
-        |  Permisos de {{user.name}} {{user.surname}}
-      a.close.btn.btn-small.btn-outline-primary(type="button", aria-label="Close", data-dismiss="modal")
+        |  
+        = msgPermissionsOf
+        |  {{user.name}} {{user.surname}}
+      a.close.btn.btn-small.btn-outline-primary(type="button", aria-label=btnClose, data-dismiss="modal")
         span(aria-hidden="true")
           | &times;
   div.modal-body.print-form
@@ -16,7 +18,8 @@ div.modal-content.panel.panel-danger
               th.print-hide(style="width:30px; min-width: 30px; max-width: 30px;")
                 input(type="checkbox", ng-model="allPermissionsSelected", ng-change="checkAllPermissions()")
               th(style="min-width: 70px;")
-                |  Permisos de Menús
+                |  
+                = msgMenuPermissions
           tbody
             tr(ng-repeat="permission in user.permissions")
               td.print-hide
@@ -35,7 +38,9 @@ div.modal-content.panel.panel-danger
         div.col-sm-12.buttons
           a.btn.btn-small.btn-outline-primary(data-dismiss="modal")
             span.fa.fa-triangle-left
-            |  Volver
+            |  
+            = btnReturn
           a.btn.btn-small.btn-primary(ng-click="updateUserPermissions()", ng-if="menuCrude.indexOf('c')>=0 || menuCrude.indexOf('u')>=0")
             span.fa.fa-save
-            |  Guardar
+            |  
+            = btnSave

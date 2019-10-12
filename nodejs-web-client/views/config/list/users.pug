@@ -2,14 +2,22 @@ div.container-fluid.xyz(ng-if="menuCrude.indexOf('e')>=0", ng-controller="UserLi
   div.row
     div.col-md-4
       div(class='form-group has-feedback has-feedback-right')
-        input.form-control(type="text", ng-model="search", ng-change="filter()", placeholder="Buscar")
+        input.form-control(type="text", ng-model="search", ng-change="filter()", placeholder=phSearch)
         i(class='form-control-feedback fa fa-search')
     div.col-md-1
       select#selectPages.selectpicker(ng-model="entryLimit", multiple, data-max-options="1", title="Usuarios por página ...")
-        option(value="10") 10 usuarios por página
-        option(value="20") 20 usuarios por página
-        option(value="50") 50 usuarios por página
-        option(value="100") 100 usuarios por página
+        option(value="10")
+          | 10 
+          = msgUsersPerPage
+        option(value="20")
+          | 20 
+          = msgUsersPerPage
+        option(value="50")
+          | 50 
+          = msgUsersPerPage
+        option(value="100")
+          | 100 
+          = msgUsersPerPage
   div.row
     div.col-lg-12.data.printable
       table.table.table-striped.table-condensed
@@ -18,27 +26,30 @@ div.container-fluid.xyz(ng-if="menuCrude.indexOf('e')>=0", ng-controller="UserLi
             th.print-hide
               // TODO - Change input style to .abc-checkbox.
               input(type="checkbox", ng-model="allIdsSelected", ng-change="checkAll()")
-            th(style="min-width: 80px;", ng-click="sort_by('name')", title="Pulsa para ordenar por esta columna.")
-              | Nombre
-            th(style="min-width: 80px;", ng-click="sort_by('surname')", title="Pulsa para ordenar por esta columna.")
-              | Apellidos
-            th(style="min-width: 80px;", ng-click="sort_by('email')", title="Pulsa para ordenar por esta columna.")
+            th(style="min-width: 80px;", ng-click="sort_by('name')", title=titleClickToShortByThisColumn)
+              = thName
+            th(style="min-width: 80px;", ng-click="sort_by('surname')", title=titleClickToShortByThisColumn)
+              = thSurname
+            th(style="min-width: 80px;", ng-click="sort_by('email')", title=titleClickToShortByThisColumn)
               span.fa.fa-envelope
-              |  Email
-            th(style="min-width: 80px;", ng-click="sort_by('mobile')", title="Pulsa para ordenar por esta columna.")
+              |  
+              = thEmail
+            th(style="min-width: 80px;", ng-click="sort_by('mobile')", title=titleClickToShortByThisColumn)
               span.fa.fa-mobile
-              |  Móvil
+              |  
+              = thMobile
             th.print-hide(style="width:50px; min-width: 50px; max-width: 50px;")
-              a.btn.btn-small.btn-success(print-div=".printable", print-div-type="list", print-div-title="Listado de Usuarios", title="Imprimir Listado", ng-disabled="filteredItems == 0")
+              a.btn.btn-small.btn-success(print-div=".printable", print-div-type="list", print-div-title=titlePrintDivUsers, title=titlePrintList, ng-disabled="filteredItems == 0")
                 span.fa.fa-print
             th.print-hide(style="width:50px; min-width: 50px; max-width: 50px;")
-              a.btn.btn-small.btn-primary.hide(ng-click="", data-toggle="modal", title="Filtrar Usuarios", data-target="#userModal")
+            //- TODO - Add filter button
+              a.btn.btn-small.btn-primary.hide(ng-click="", data-toggle="modal", title=titleFilterUsers, data-target="#userModal")
                 span.fa.fa-filter
             th.print-hide(style="width:50px; min-width: 50px; max-width: 50px;")
-              a.btn.btn-small.btn-warning(ng-click="newUser()", data-toggle="modal", title="Nuevo Usuario", data-target="#userModal", ng-if="menuCrude.indexOf('c')>=0")
+              a.btn.btn-small.btn-warning(ng-click="newUser()", data-toggle="modal", title=titleNewUser, data-target="#userModal", ng-if="menuCrude.indexOf('c')>=0")
                 span.fa.fa-plus
             th.print-hide(style="width:50px; min-width: 50px; max-width: 50px;")
-              a.btn.btn-small.btn-primary(ng-click="deleteSelectedUsers()", title="Borrar Seleccionados", ng-disabled="!anyIdsSelected", ng-if="menuCrude.indexOf('d')>=0")
+              a.btn.btn-small.btn-primary(ng-click="deleteSelectedUsers()", title=titleDeleteSelected, ng-disabled="!anyIdsSelected", ng-if="menuCrude.indexOf('d')>=0")
                 span.fa.fa-trash
         tbody
           tr(ng-repeat="user in filtered = (users | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit")
@@ -54,26 +65,30 @@ div.container-fluid.xyz(ng-if="menuCrude.indexOf('e')>=0", ng-controller="UserLi
             td
               | {{ user.mobile }}
             td.print-hide
-              a.btn.btn-small.btn-success(ng-click="viewUser(user.id)", data-toggle="modal", title="Ver Datos", data-target="#userModal", ng-if="menuCrude.indexOf('r')>=0")
+              a.btn.btn-small.btn-success(ng-click="viewUser(user.id)", data-toggle="modal", title=titleShowData, data-target="#userModal", ng-if="menuCrude.indexOf('r')>=0")
                 span.fa.fa-share-alt
             td.print-hide
-              a.btn.btn-small.btn-primary(ng-click="editPermissions(user.id)", data-toggle="modal", title="Permisos del Usuario" data-target="#permissionsModal", ng-if="menuCrude.indexOf('u')>=0")
+              a.btn.btn-small.btn-primary(ng-click="editPermissions(user.id)", data-toggle="modal", title=titleUserPermissions, data-target="#permissionsModal", ng-if="menuCrude.indexOf('u')>=0")
                 span.fa.fa-chevron-down
             td.print-hide
-              a.btn.btn-small.btn-warning(ng-click="editUser(user.id)", data-toggle="modal", title="Modificar Datos", data-target="#userModal", ng-if="menuCrude.indexOf('u')>=0")
+              a.btn.btn-small.btn-warning(ng-click="editUser(user.id)", data-toggle="modal", title=titleModifyData, data-target="#userModal", ng-if="menuCrude.indexOf('u')>=0")
                 span.fa.fa-pencil
             td.print-hide
-              a.btn.btn-small.btn-primary(ng-click="deleteUser(user.id)", title="Borrar Usuario", ng-if="menuCrude.indexOf('d')>=0")
+              a.btn.btn-small.btn-primary(ng-click="deleteUser(user.id)", title=titleDeleteUser, ng-if="menuCrude.indexOf('d')>=0")
                 span.fa.fa-trash
     div.col-lg-12(ng-show="filteredItems == 0")
       div.col-lg-12
-        h4
-          | No se han encontrado usuarios.
+        h4=msgNoUsersFound
     div.col-lg-12(ng-show="filteredItems > 0")
       div.col-md-9
-        ul.pagination-sm(uib-pagination, ng-model="currentPage", max-size="10", on-select-page="setPage(page)", boundary-links="true", total-items="filteredItems", items-per-page="entryLimit", force-ellipses="true", first-text="Primero", previous-text="Anterior", next-text="Siguiente", last-text="Último")
+        ul.pagination-sm(uib-pagination, ng-model="currentPage", max-size="10", on-select-page="setPage(page)", boundary-links="true", total-items="filteredItems", items-per-page="entryLimit", force-ellipses="true", first-text=msgFirst, previous-text=msgPrevious, next-text=msgNext, last-text=msgLast)
       div.col-md-3.list-counter.text-right.text-nowrap.small
-          | Listando {{ filtered.length }} de {{ totalItems }} usuario(s).
+          = msgListing
+          |  {{ filtered.length }} 
+          = msgOf
+          |  {{ totalItems }} 
+          = msgUser
+          | {{ users.length > 1 ? 's.' : '.' }}
     div#userModal.modal.fade.in.col-xs-12.col-sm-6.col-md-6.col-md-offset-4.col-xs-offset-3(role="dialog")
       div.modal-dialog.modal-lg
         include ../crude/users
