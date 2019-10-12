@@ -6,7 +6,8 @@ exports.createToken = user => {
   var payload = {
     sub: {
       id: user.id,
-      role: user.roleId ? user.roleId : undefined
+      role: user.roleId ? user.roleId : undefined,
+      locale: user.locale ? user.locale : undefined
     },
     iat: moment().unix(),
     exp: moment()

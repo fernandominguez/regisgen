@@ -1,6 +1,6 @@
 let config = require("../config");
+let lang = require("../services/lang");
 let axios = require("axios");
-let i18n = require("i18n");
 let jwt = require("jwt-simple");
 let passport = require("passport");
 
@@ -21,11 +21,13 @@ passport.serializeUser((token, done) => {
   done(null, {
     id: user.id ? user.id : undefined,
     role: user.role ? user.role : undefined,
+    locale: user.locale ? user.locale : undefined,
     token: token
   });
 });
 
 passport.deserializeUser((user, done) => {
+  console.log(user);
   if (!user.role) {
     axios
       .get(config.API_HOST + "/api/user/:id", {
@@ -65,7 +67,7 @@ passport.deserializeUser((user, done) => {
     axios
       .get(config.API_HOST + "/api/user/:id/:role", {
         headers: { authorization: user.token },
-        params: { id: user.id, role: user.role }
+        params: { id: user.id, role: user.role, locale: lang.getLocale(user.locale) }
       })
       .then(data => {
         if (data && data.data && data.data.length > 0) {

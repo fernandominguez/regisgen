@@ -29,6 +29,7 @@ module.exports = app => {
             } else {
               var tokenData = JSON.parse(JSON.stringify(rows[0]));
               tokenData.roleId = role ? role : undefined;
+              tokenData.locale = lang.getLocale(req, res);
               return res
                 .status(200)
                 .json({ token: token.createToken(tokenData) });
