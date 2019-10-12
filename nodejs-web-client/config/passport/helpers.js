@@ -27,7 +27,6 @@ passport.serializeUser((token, done) => {
 });
 
 passport.deserializeUser((user, done) => {
-  console.log(user);
   if (!user.role) {
     axios
       .get(config.API_HOST + "/api/user/:id", {
