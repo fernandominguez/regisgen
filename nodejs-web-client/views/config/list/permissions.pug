@@ -56,8 +56,7 @@ div.container-fluid.xyz(ng-if="menuCrude.indexOf('e')>=0", ng-controller="Permis
                 span.fa.fa-trash
     div.col-lg-12(ng-show="filteredItems == 0")
       div.col-lg-12
-        h4
-          | No se han encontrado permisos.
+        h4=msgNoPermissionsFound
     div.col-lg-12(ng-show="filteredItems > 0")
       div.col-md-9
         ul.pagination-sm(uib-pagination, ng-model="currentPage", max-size="10", on-select-page="setPage(page)", boundary-links="true", total-items="filteredItems", items-per-page="entryLimit", force-ellipses="true", first-text=msgFirst, previous-text=msgPrevious, next-text=msgNext, last-text=msgLast)
