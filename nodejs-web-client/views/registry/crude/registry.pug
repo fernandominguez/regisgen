@@ -43,7 +43,7 @@ div.modal-content.panel.panel-danger(style="scroll: auto;")
           input#inputExDe.form-control(name="exde" type="text" ng-model="note.destinyThirdpartyName", disabled)
       div.form-group(ng-if="(!isNew || isCreated) && ((note.type == 'e' && note.subtype == 'e') || note.subtype == 'i')")
         div.col-sm-12
-          label.text-nowrap(for="inputInDe")=lblDespartmentOfDestiny
+          label.text-nowrap(for="inputInDe")=lblDepartmentOfDestiny
           input#inputInDe.form-control(name="inde" type="text" ng-model="note.destinyDepartmentName", disabled)
       div.form-group.print-hide(ng-if="isNew && !isCreated")
         div.col-sm-6.text-center(ng-class="{ 'has-error': (!isNew && noteForm.type.$invalid) || (isNew && noteForm.type.$invalid && noteForm.type.$dirty) }")
@@ -77,7 +77,7 @@ div.modal-content.panel.panel-danger(style="scroll: auto;")
                   a.btn.btn-small.btn-warning(ng-click="newThirdparty()" data-toggle="modal" title=titleNewThirdparty data-target="#thirdpartyModal" style="width: 40px; min-width: 40px; max-width: 40px;")
                     span.fa.fa-plus
                 div(style="float:left; position:relative;")
-                  select#selectExOr.selectpicker.form-control(name="exor" ng-model="note.exor", multiple, data-max-options="1" ng-disabled="isView" data-none-selected-text=msgSelectOrigin + "" ..." data-live-search="true" data-size="10")
+                  select#selectExOr.selectpicker.form-control(name="exor" ng-model="note.exor", multiple, data-max-options="1" ng-disabled="isView" data-none-selected-text=msgSelectOrigin + " ..." data-live-search="true" data-size="10")
           div#inor.col-sm-12.text-center(ng-show="(noteForm.type.$viewValue == 's' && noteForm.subtype.$viewValue == 'e') || ((noteForm.type.$viewValue == 'e' || noteForm.type.$viewValue == 's') && noteForm.subtype.$viewValue == 'i')")
             label.text-nowrap(for="selectInOr" style="width: 100%;")=lblDepartmentOfOrigin
               div(style="float: left; position: relative; width: 100%;")
