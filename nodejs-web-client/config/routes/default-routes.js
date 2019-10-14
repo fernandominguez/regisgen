@@ -59,6 +59,7 @@ module.exports = function(app) {
         btnPrintStamp: lang.message("btnPrintStamp", req, res),
         btnReturn: lang.message("btnReturn", req, res),
         btnSave: lang.message("btnSave", req, res),
+        lblAddress: lang.message("lblAddress", req, res),
         lblChannel: lang.message("lblChannel", req, res),
         lblContent: lang.message("lblContent", req, res),
         lblDepartmentOfDestiny: lang.message(
@@ -69,13 +70,18 @@ module.exports = function(app) {
         lblDepartmentOfOrigin: lang.message("lblDepartmentOfOrigin", req, res),
         lblDocuments: lang.message("lblDocuments", req, res),
         lblDone: lang.message("lblDone", req, res),
+        lblEmail: lang.message("lblEmail", req, res),
         lblEntry: lang.message("lblEntry", req, res),
         lblExit: lang.message("lblExit", req, res),
         lblExternal: lang.message("lbExternal", req, res),
         lblFromTheDate: lang.message("lblFromTheDate", req, res),
         lblFromTheNumber: lang.message("lblFromTheNumber", req, res),
         lblInternal: lang.message("lblInternal", req, res),
+        lblName: lang.message("lblName", req, res),
+        lblNIFCIFNIE: lang.message("lblNIFCIFNIE", req, res),
+        lblOffice: lang.message("lblOffice", req, res),
         lblPending: lang.message("lblPending", req, res),
+        lblPhone: lang.message("lblPhone", req, res),
         lblStatus: lang.message("lblStatus", req, res),
         lblSubtype: lang.message("lblSubtype", req, res),
         lblTag: lang.message("lblTag", req, res),
@@ -144,7 +150,59 @@ module.exports = function(app) {
     "/v/departments/:view",
     passport.authenticationMiddleware(),
     (req, res) => {
-      res.render("registry/list/" + req.params.view);
+      res.render("registry/list/" + req.params.view, {
+        btnAdd: lang.message("btnAdd", req, res),
+        btnClose: lang.message("btnClose", req, res),
+        btnDelete: lang.message("btnDelete", req, res),
+        btnFilter: lang.message("btnFilter", req, res),
+        btnPrint: lang.message("btnPrint", req, res),
+        btnPrintStamp: lang.message("btnPrintStamp", req, res),
+        btnReturn: lang.message("btnReturn", req, res),
+        btnSave: lang.message("btnSave", req, res),
+        lblAddress: lang.message("lblAddress", req, res),
+        lblEmail: lang.message("lblEmail", req, res),
+        lblName: lang.message("lblName", req, res),
+        lblOffice: lang.message("lblOffice", req, res),
+        lblPhone: lang.message("lblPhone", req, res),
+        msgDepartment: lang.message("msgDepartment", req, res),
+        msgDepartmentsPerPage: lang.message("msgDepartmentsPerPage", req, res),
+        msgFirst: lang.message("msgFirst", req, res),
+        msgLast: lang.message("msgLast", req, res),
+        msgListing: lang.message("msgListing", req, res),
+        msgNext: lang.message("msgNext", req, res),
+        msgNewDepartment: lang.message("msgNewDepartment", req, res),
+        msgNoDepartmentsFound: lang.message("msgNoDepartmentsFound", req, res),
+        msgOf: lang.message("msgOf", req, res),
+        msgPrevious: lang.message("msgPrevious", req, res),
+        phSearch: lang.message("phSearch", req, res),
+        thAddress: lang.message("thAddress", req, res),
+        thEmail: lang.message("thEmail", req, res),
+        thId: lang.message("thId", req, res),
+        thName: lang.message("thName", req, res),
+        thOffice: lang.message("thOffice", req, res),
+        thPhone: lang.message("thPhone", req, res),
+        titleClickToShortByThisColumn: lang.message(
+          "titleClickToShortByThisColumn",
+          req,
+          res
+        ),
+        titleDeleteDepartment: lang.message("titleDeleteDepartment", req, res),
+        titleDeleteSelected: lang.message("titleDeleteSelected", req, res),
+        titleDepartmentsPerPage: lang.message(
+          "titleDepartmentsPerPage:",
+          req,
+          res
+        ),
+        titleModifyData: lang.message("titleModifyData", req, res),
+        titleNewDepartment: lang.message("titleNewDepartment", req, res),
+        titlePrintDivDepartments: lang.message(
+          "titlePrintDivDepartments",
+          req,
+          res
+        ),
+        titlePrintList: lang.message("titlePrintList", req, res),
+        titleShowData: lang.message("titleShowData", req, res)
+      });
     }
   );
   // Display Thirdparties Templates
@@ -171,6 +229,7 @@ module.exports = function(app) {
         msgListing: lang.message("msgListing", req, res),
         msgNext: lang.message("msgNext", req, res),
         msgNewThirdparty: lang.message("msgNewThirdparty", req, res),
+        msgNoDepartmentsFound: lang.message("msgNoDepartmentsFound", req, res),
         msgOf: lang.message("msgOf", req, res),
         msgPrevious: lang.message("msgPrevious", req, res),
         msgThirdpartiesPerPage: lang.message(
