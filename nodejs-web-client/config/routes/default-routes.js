@@ -94,6 +94,7 @@ module.exports = function(app) {
         msgFilterNotes: lang.message("msgFilterNotes", req, res),
         msgLoading: lang.message("msgLoading", req, res),
         msgNewNote: lang.message("msgNewNote", req, res),
+        msgNewThirdparty: lang.message("msgNewThirdparty", req, res),
         msgNoteData: lang.message("msgNoteData", req, res),
         msNothingSelected: lang.message("msgNothingSelected", req, res),
         msgNoNotesFound: lang.message("msgNoNotesFound", req, res),
@@ -151,7 +152,62 @@ module.exports = function(app) {
     "/v/thirdparties/:view",
     passport.authenticationMiddleware(),
     (req, res) => {
-      res.render("registry/list/" + req.params.view);
+      res.render("registry/list/" + req.params.view, {
+        btnAdd: lang.message("btnAdd", req, res),
+        btnClose: lang.message("btnClose", req, res),
+        btnDelete: lang.message("btnDelete", req, res),
+        btnFilter: lang.message("btnFilter", req, res),
+        btnPrint: lang.message("btnPrint", req, res),
+        btnPrintStamp: lang.message("btnPrintStamp", req, res),
+        btnReturn: lang.message("btnReturn", req, res),
+        btnSave: lang.message("btnSave", req, res),
+        lblAddress: lang.message("lblAddress", req, res),
+        lblEmail: lang.message("lblEmail", req, res),
+        lblName: lang.message("lblName", req, res),
+        lblNIFCIFNIE: lang.message("lblNIFCIFNIE", req, res),
+        lblPhone: lang.message("lblPhone", req, res),
+        msgFirst: lang.message("msgFirst", req, res),
+        msgLast: lang.message("msgLast", req, res),
+        msgListing: lang.message("msgListing", req, res),
+        msgNext: lang.message("msgNext", req, res),
+        msgNewThirdparty: lang.message("msgNewThirdparty", req, res),
+        msgOf: lang.message("msgOf", req, res),
+        msgPrevious: lang.message("msgPrevious", req, res),
+        msgThirdpartiesPerPage: lang.message(
+          "msgThirdpartiesPerPage",
+          req,
+          res
+        ),
+        msgThirdparty: lang.message("msgThirdparty", req, res),
+        phSearch: lang.message("phSearch", req, res),
+        thAddress: lang.message("thAddress", req, res),
+        thEmail: lang.message("thEmail", req, res),
+        thId: lang.message("thId", req, res),
+        thIdentification: lang.message("thIdentification", req, res),
+        thName: lang.message("thName", req, res),
+        thPhone: lang.message("thPhone", req, res),
+        titleClickToShortByThisColumn: lang.message(
+          "titleClickToShortByThisColumn",
+          req,
+          res
+        ),
+        titleDeleteSelected: lang.message("titleDeleteSelected", req, res),
+        titleDeleteThirdparty: lang.message("titleDeleteThirdparty", req, res),
+        titleModifyData: lang.message("titleModifyData", req, res),
+        titleNewThirdparty: lang.message("titleNewThirdparty", req, res),
+        titlePrintList: lang.message("titlePrintList", req, res),
+        titlePrintDivThirdparties: lang.message(
+          "titlePrintDivThirdparties",
+          req,
+          res
+        ),
+        titleShowData: lang.message("titleShowData", req, res),
+        titleThirdpartiesPerPage: lang.message(
+          "titleThirdpartiesPerPage:",
+          req,
+          res
+        )
+      });
     }
   );
   // Display Config Templates

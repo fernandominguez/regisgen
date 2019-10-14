@@ -1,22 +1,20 @@
 div.modal-content.panel.panel-danger
   div.modal-header
     div.panel-title
-      span(ng-if="isNew")
-        | Nuevo Tercero
+      span(ng-if="isNew")=msgNewThirdparty
       span(ng-if="!isNew")
         | {{ thidparty.name }}
-      a.close.btn.btn-small.btn-outline-primary(type="button", aria-label="Close", ng-click="closeModal('thirdpartyModal')", ng-if="fromModal")
+      a.close.btn.btn-small.btn-outline-primary(type="button", aria-label=btnClose, ng-click="closeModal('thirdpartyModal')", ng-if="fromModal")
         span(aria-hidden="true")
           | &times;
-      a.close.btn.btn-small.btn-outline-primary(type="button", aria-label="Close", data-dismiss="modal", ng-if="!fromModal")
+      a.close.btn.btn-small.btn-outline-primary(type="button", aria-label=btnClose, data-dismiss="modal", ng-if="!fromModal")
         span(aria-hidden="true")
           | &times;
   div.modal-body.print-form
     form.form-horizontal.col-xs-12.col-sm-12.col-md-offset-1.col-xs-offset-1(name="thirdpartyForm", novalidate="novalidate")
       div.form-group
         div.col-sm-12(ng-class="{ 'has-error': thirdpartyForm.name.$invalid && thirdpartyForm.name.$dirty }")
-          label.text-nowrap(for="inputName")
-            | Nombre
+          label.text-nowrap(for="inputName")=lblName
           input#inputName.form-control(name="name", type="text", ng-model="thirdparty.name", required, ng-disabled="isView", ng-maxlength="45", ng-minlength="2")
           div.help-block(ng-messages="thirdpartyForm.name.$error" ng-if="thirdpartyForm.name.$invalid && thirdpartyForm.name.$dirty")
             include ../../messages.pug
@@ -24,7 +22,8 @@ div.modal-content.panel.panel-danger
         div.col-sm-12(ng-class="{ 'has-error': (!isNew && thirdpartyForm.address.$invalid) || (isNew && thirdpartyForm.address.$invalid && thirdpartyForm.address.$dirty) }")
           label.text-nowrap(for="inputAddress")
             span.fa.fa-map-marker
-            |  Dirección
+            |  
+            = lblAddress
           input#inputAddress.form-control(name="address", type="text", ng-model="thirdparty.address", ng-disabled="isView", ng-maxlength="255")
           div.help-block(ng-messages="thirdpartyForm.address.$error" ng-if="(!isNew && thirdpartyForm.address.$invalid) || (isNew && thirdpartyForm.address.$invalid && thirdpartyForm.address.$dirty)")
             include ../../messages.pug
@@ -32,7 +31,8 @@ div.modal-content.panel.panel-danger
         div.col-sm-12(ng-class="{ 'has-error': (!isNew && thirdpartyForm.email.$invalid) || (isNew && thirdpartyForm.email.$invalid && thirdpartyForm.email.$dirty) }")
           label.text-nowrap(for="inputEmail")
             span.fa.fa-envelope
-            |  Email
+            |  
+            = lblEmail
           input#inputEmail.form-control(name="email", type="email", ng-model="thirdparty.email", ng-disabled="isView", ng-maxlength="255")
           div.help-block(ng-messages="thirdpartyForm.email.$error" ng-if="(!isNew && thirdpartyForm.email.$invalid) || (isNew && thirdpartyForm.email.$invalid && thirdpartyForm.email.$dirty)")
             include ../../messages.pug
@@ -40,20 +40,19 @@ div.modal-content.panel.panel-danger
         div.col-sm-4(ng-class="{ 'has-error': (!isNew && thirdpartyForm.phone.$invalid) || (isNew && thirdpartyForm.phone.$invalid && thirdpartyForm.phone.$dirty) }")
           label.text-nowrap(for="inputPhone")
             span.fa.fa-earphone
-            |  Teléfono
+            |  
+            = lblPhone
           input#inputPhone.form-control.text-center(name="phone", type="text", ng-model="thirdparty.phone", ng-disabled="isView", ng-maxlength="9", ng-minlength="9", ng-pattern="/^\[0-9]{9}$/")
           div.help-block(ng-messages="thirdpartyForm.phone.$error" ng-if="(!isNew && thirdpartyForm.phone.$invalid) || (isNew && thirdpartyForm.phone.$invalid && thirdpartyForm.phone.$dirty)")
             include ../../messages.pug
         div.col-sm-4.text-center(ng-class="{ 'has-error': (!isNew && thirdpartyForm.islegal.$invalid) || (isNew && thirdpartyForm.islegal.$invalid && thirdpartyForm.islegal.$dirty) }")
           div.abc-checkbox.abc-checkbox-primary.form-check
             input#inputIslegal.form-check-input(name="islegal", type="checkbox", ng-model="thirdparty.islegal", ng-disabled="isView")
-            label.text-nowrap.form-check-label(for="#inputIslegal")
-              | ¿Persona?
+            label.text-nowrap.form-check-label(for="#inputIslegal")=lblPerson
           div.help-block(ng-messages="thirdpartyForm.islegal.$error" ng-if="(!isNew && thirdpartyForm.islegal.$invalid) || (isNew && thirdpartyForm.islegal.$invalid && thirdpartyForm.islegal.$dirty)")
             include ../../messages.pug
         div.col-sm-4.text-center(ng-class="{ 'has-error': thirdpartyForm.identifier.$invalid && thirdpartyForm.identifier.$dirty }")
-          label.text-nowrap(for="inputIdenfier")
-            | NIF/CIF/NIE
+          label.text-nowrap(for="inputIdenfier")=lblNIFCIFNIE
           input#inputIdentifier.form-control.text-center(name="identifier", type="text", ng-model="thirdparty.identifier", ng-disabled="isView", ng-maxlength="20")
           div.help-block(ng-messages="thirdpartyForm.identifier.$error" ng-if="thirdpartyForm.identifier.$invalid && thirdpartyForm.identifier.$dirty")
             include ../../messages.pug
@@ -76,19 +75,24 @@ div.modal-content.panel.panel-danger
       div.col-sm-12.buttons
         a.btn.btn-small.btn-outline-primary(role="button", data-dismiss="modal", ng-if="!fromModal")
           span.fa.fa-triangle-left
-          | Volver
+          |  
+          = btnReturn
         a.btn.btn-small.btn-outline-primary(role="button", ng-click="closeModal('thirdpartyModal')", ng-if="fromModal")
           span.fa.fa-triangle-left
-          |  Volver
+          |  
+          = btnReturn
         span(ng-if="isView")
           a.btn.btn-small.btn-primary(print-div=".print-form", print-div-type="form")
             span.fa.fa-print
-            |  Imprimir
+            |  
+            = btnPrint
         span(ng-if="!isView && !isNew")
           a.btn.btn-small.btn-primary(ng-click="updateThirdparty(thirdpartyForm.$valid)", ng-disabled="thirdpartyForm.$invalid", ng-if="menuCrude.indexOf('u')>=0")
             span.fa.fa-save
-            |  Guardar
+            |  
+            = btnSave
         span(ng-if="(!isView && isNew)")
           a.btn.btn-small.btn-primary(ng-click="addThirdparty(thirdpartyForm.$valid)", ng-disabled="thirdpartyForm.$invalid", ng-if="menuCrude.indexOf('c')>=0")
             span.fa.fa-save
-            |  Añadir
+            |  
+            = btnAdd
