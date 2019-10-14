@@ -2,78 +2,62 @@ div.container-fluid.xyz(ng-if="menuCrude.indexOf('e')>=0", ng-controller="Regist
   div.row
     div.col-md-4.col-sm-4
       div.form-group.has-feedback.has-feedback-right
-        input.form-control(type="text", ng-model="search", ng-change="filter()", placeholder="Buscar")
+        input.form-control(type="text", ng-model="search", ng-change="filter()", placeholder=phSearch)
         i.form-control-feedback.fa.fa-search
   // TODO - Add filter button
   //-
     div.col-md-4.col-sm-4
-      a.btn.btn-small.btn-success(ng-click="filter()", data-toggle="modal", data-target="#noteFilter", title="Filtrar Anotaciones", ng-disabled="filteredItems == 0", ng-if="menuCrude.indexOf('r')>=0")
+      a.btn.btn-small.btn-success(ng-click="filter()", data-toggle="modal", data-target="#noteFilter", title=titleFilterNotes ng-disabled="filteredItems == 0", ng-if="menuCrude.indexOf('r')>=0")
         span.fa.fa-filter
   div.row
     div.col-lg-12(ng-show="filteredItems == 0")
       div.col-lg-12
-        h4
-          | No se han encontrado anotaciones.
+        h4=msgNoNotesFound
     div.col-lg-12.data.printable(ng-show="filteredItems != 0")
       table.table.table-striped.table-condensed.table-scrollable
         thead
           tr
             th.col-md-1.col-sx-1(style="width: 30px; min-width: 30px; max-width: 30px;")
-            th.col-md-1.col-sx-1.text-center(style="width:80px; min-width: 80px; max-width: 80px;", ng-click="sort_by('state')", title="Pulsa para ordenar por esta columna.")
-              | Estado
-            th.col-md-1.col-sx-1.text-center(style="width:80px; min-width: 80px; max-width: 80px;", ng-click="sort_by('id')", title="Pulsa para ordenar por esta columna.")
-              | Número
-            th.col-md-1.col-sx-1.text-center(style="width:100px; min-width: 100px; max-width: 100px;", ng-click="sort_by('date')", title="Pulsa para ordenar por esta columna.")
-              | Fecha
-            th.col-md-1.col-sx-1.text-center(style="width:60px; min-width: 60px; max-width: 60px;", ng-click="sort_by('type')", title="Pulsa para ordenar por esta columna.")
-              | Tipo
-            th.col-md-1.col-sx-1.text-center(style="width:60px; min-width: 60px; max-width: 60px;", ng-click="sort_by('subtype')", title="Pulsa para ordenar por esta columna.")
-              | Subtipo
-            th.col-md-2.col-sx-2.text-center(style="width:200px; min-width: 200px; max-width: 200px;", ng-click="sort_by('origin')", title="Pulsa para ordenar por esta columna.")
-              | Origen
-            th.col-md-2.col-sx-2.text-center(style="width:200px; min-width: 200px; max-width: 200px;", ng-click="sort_by('destiny')", title="Pulsa para ordenar por esta columna.")
-              | Destino
-            th.col-md-2.col-sx-2(style="min-width: 230px;", ng-click="sort_by('title')", title="Pulsa para ordenar por esta columna.")
-              | Título
+            th.col-md-1.col-sx-1.text-center(style="width:80px; min-width: 80px; max-width: 80px;", ng-click="sort_by('state')", title=titleClickToShortByThisColumn)=thStatus
+            th.col-md-1.col-sx-1.text-center(style="width:80px; min-width: 80px; max-width: 80px;", ng-click="sort_by('id')", title=titleClickToShortByThisColumn)=thNumber
+            th.col-md-1.col-sx-1.text-center(style="width:100px; min-width: 100px; max-width: 100px;", ng-click="sort_by('date')", title=titleClickToShortByThisColumn)=thDate
+            th.col-md-1.col-sx-1.text-center(style="width:60px; min-width: 60px; max-width: 60px;", ng-click="sort_by('type')", title=titleClickToShortByThisColumn)=thType
+            th.col-md-1.col-sx-1.text-center(style="width:60px; min-width: 60px; max-width: 60px;", ng-click="sort_by('subtype')", title=titleClickToShortByThisColumn)=thSubtype
+            th.col-md-2.col-sx-2.text-center(style="width:200px; min-width: 200px; max-width: 200px;", ng-click="sort_by('origin')", title=titleClickToShortByThisColumn)=thOrigin
+            th.col-md-2.col-sx-2.text-center(style="width:200px; min-width: 200px; max-width: 200px;", ng-click="sort_by('destiny')", title=titleClickToShortByThisColumn)=thDestiny
+            th.col-md-2.col-sx-2(style="min-width: 230px;", ng-click="sort_by('title')", title=titleClickToShortByThisColumn)=thTitle
             th.col-md-1.col-sx-1.print-hide(style="width: 50px; min-width: 50px; max-width: 50px;")
-              a.btn.btn-small.btn-success(ng-click="registry.refreshPage()", title="Actualizar Listado", ng-disabled="filteredItems == 0")
+              a.btn.btn-small.btn-success(ng-click="registry.refreshPage()", title=titleRefreshList, ng-disabled="filteredItems == 0")
                 span.fa.fa-refresh
             th.col-md-1.col-sx-1.print-hide(style="width: 50px; min-width: 50px; max-width: 50px;")
-              a.btn.btn-small.btn-success(print-div=".printable", print-div-type="list", print-div-title="Listado de Anotaciones", title="Imprimir Listado", ng-disabled="filteredItems == 0")
+              a.btn.btn-small.btn-success(print-div=".printable", print-div-type="list", print-div-title=titlePrintDiveNotes, title=titlePrintList, ng-disabled="filteredItems == 0")
                 span.fa.fa-print
             th.col-md-1.col-sx-1.print-hide(style="width: 50px; min-width: 50px; max-width: 50px;")
-              a.btn.btn-small.btn-warning(ng-click="newNote()", data-toggle="modal", title="Nueva Anotación", data-target="#noteModal", ng-if="menuCrude.indexOf('c')>=0")
+              a.btn.btn-small.btn-warning(ng-click="newNote()", data-toggle="modal", title=titleNewNote, data-target="#noteModal", ng-if="menuCrude.indexOf('c')>=0")
                 span.fa.fa-plus
         tbody.table-scroll(table-scroll="registry.nextPage()", table-scroll-disabled="registry.busy", table-scroll-num-items="scrollitems")
           tr.col-md-14.col-sx-14(ng-repeat="note in filtered = (registry.items | filter:search | orderBy : predicate :reverse)")
-            td.col-md-1.col-sx-1(style="width: 30px; min-width: 30px; max-width:30px;", title="{{ note.numfiles }} documento{{ note.numfiles > 1 ? 's' : '' }}")
+            td.col-md-1.col-sx-1(style="width: 30px; min-width: 30px; max-width:30px;", title="{{ note.numfiles }} " + titleDocument + "{{ note.numfiles > 1 ? 's' : '' }}")
               i.fa.fa-file(ng-if="note.numfiles >= 1")
               i.fa.fa-plus(ng-if="note.numfiles > 1")
             td.col-md-1.col-sx-1.text-center(style="width:80px; min-width: 80px; max-width: 80px;", ng-if="note.state == 'p'")
-              span.label.label-warning
-                | Pendiente
+              span.label.label-warning=lblPending
             td.col-md-1.col-sx-1.text-center(style="width:80px; min-width: 80px; max-width: 80px;", ng-if="note.state == 'r'")
-              span.label.label-success
-                | Realizada
+              span.label.label-success=lblDone
             td.col-md-1.col-sx-1.text-center(style="width:60px; min-width: 60px; max-width: 60px;", ng-if="note.state == 'a'")
-              span.label.label-danger
-                | Anulada
+              span.label.label-danger=lblVoided
             td.col-md-1.col-sx-1.text-center(style="width:80px; min-width: 80px; max-width: 80px;")
               | {{ note.number }}
             td.col-md-1.col-sx-1.text-center(style="width:100px; min-width: 100px; max-width: 100px;")
               | {{ note.dateFormat }}
             td.col-md-1.col-sx-1.text-center(style="width:60px; min-width: 60px; max-width: 60px;", ng-if="note.type == 'e'")
-              span.label.label-info
-                | Entrada
+              span.label.label-info=lblEntry
             td.col-md-1.col-sx-1.text-center(style="width:60px; min-width: 60px; max-width: 60px;", ng-if="note.type == 's'")
-              span.label.label-primary
-                | Salida
+              span.label.label-primary=lblExit
             td.col-md-1.col-sx-1.text-center(style="width:60px; min-width: 60px; max-width: 60px;", ng-if="note.subtype == 'i'")
-              span.label.label-success
-                | Interna
+              span.label.label-success=lblInternal
             td.col-md-1.col-sx-1.text-center(style="width:60px; min-width: 60px; max-width: 60px;", ng-if="note.subtype == 'e'")
-              span.label.label-warning
-                | Externa
+              span.label.label-warning=lblExternal
             td.col-md-2.col-sx-2.text-center(style="width:200px; min-width: 200px; max-width: 200px;", ng-if="(note.type == 'e') && (note.subtype == 'e')")
               | {{ note.originThirdpartyName }}
             td.col-md-2.col-sx-2.text-center(style="width:200px; min-width: 200px; max-width: 200px;", ng-if="(note.type == 'e' && note.subtype == 'i') || (note.type == 's')")
@@ -86,15 +70,17 @@ div.container-fluid.xyz(ng-if="menuCrude.indexOf('e')>=0", ng-controller="Regist
               | {{ note.title }}
             td.col-md-1.col-sx-1.print-hide(style="width: 50px; min-width: 50px; max-width: 50px;")
             td.col-md-1.col-sx-1.print-hide(style="width: 50px; min-width: 50px; max-width: 50px;")
-              a.btn.btn-small.btn-success(ng-click="viewNote(note.id)", data-toggle="modal", title="Ver Datos", data-target="#noteModal", ng-if="menuCrude.indexOf('r')>=0")
+              a.btn.btn-small.btn-success(ng-click="viewNote(note.id)", data-toggle="modal", title=titleShowData, data-target="#noteModal", ng-if="menuCrude.indexOf('r')>=0")
                 span.fa.fa-share-alt
             td.col-md-1.col-sx-1.print-hide(style="width: 50px; min-width: 50px; max-width: 50px;")
-              a.btn.btn-small.btn-warning(ng-click="editNote(note.id)", data-toggle="modal", title="Modificar Datos", data-target="#noteModal", ng-if="menuCrude.indexOf('u')>=0")
+              a.btn.btn-small.btn-warning(ng-click="editNote(note.id)", data-toggle="modal", title=titleModifyData, data-target="#noteModal", ng-if="menuCrude.indexOf('u')>=0")
                 span.fa.fa-pencil
     div.col-lg-12(ng-show="registry.busy")
       h5
         span.fa.fa-hourglass
-        |  Cargando ...
+        |  
+        = msgLoading
+        |  ...
     div#noteModal.modal.fade.in.col-xs-12.col-md-6.col-sm-10.col-md-offset-4.col-xs-offset-1(role="dialog")
       div.modal-dialog.modal-lg
         include ../crude/registry
