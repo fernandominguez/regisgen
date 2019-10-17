@@ -222,9 +222,9 @@ Method: *GET*
 
 Parameters:
 
-- `:locale:` *Locale for the messages system`
-- `:menu:` *Menu identifier`
-- `:role:` *Permission identifier`
+- `:locale:` *Locale for the messages system.*
+- `:menu:` *Menu identifier.*
+- `:role:` *Permission identifier.*
 
 ### [/api/permission/:id](/api/permission/:id)
 
