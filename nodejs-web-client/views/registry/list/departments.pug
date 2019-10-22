@@ -26,10 +26,10 @@ div.container-fluid.xyz(ng-if="menuCrude.indexOf('e')>=0", ng-controller="Depart
             th.print-hide(style="width:25px; min-width: 25px; max-width: 25px;")
               input(type="checkbox", ng-model="allIdsSelected", ng-change="checkAll()")
             th.text-center(style="width:60px; min-width: 60px; max-width: 60px;", ng-click="sort_by('id')", title=titleClickToShortByThisColumn)=thId
-            th(style="width:150px; min-width: 150px; max-width: 150px;", ng-click="sort_by('name')", title=titleClickToShortByThisColumn)=thName
+            th(style="min-width: 150px;", ng-click="sort_by('name')", title=titleClickToShortByThisColumn)=thName
             th(style="min-width: 150px;", ng-click="sort_by('address')", title=titleClickToShortByThisColumn)=thAddress
             th.text-center(style="min-width: 150px;", ng-click="sort_by('phone')", title=titleClickToShortByThisColumn)=thPhone
-            th(style="width:100px; min-width: 100px; max-width:100px;", ng-click="sort_by('email')", title=titleClickToShortByThisColumn)=thEmail
+            th.text-center(style="min-width: 150px;", ng-click="sort_by('email')", title=titleClickToShortByThisColumn)=thEmail
             th.text-center(style="width:50px; min-width: 50px; max-width: 50px;", ng-click="sort_by('office')", title=titleClickToShortByThisColumn)=thOffice
             th.print-hide(style="width:50px; min-width: 50px; max-width: 50px;")
               a.btn.btn-small.btn-success(print-div=".printable", print-div-type="list", print-div-title=titlePrintDivDepartments, title=titlePrintList, ng-disabled="filteredItems == 0")
@@ -38,10 +38,10 @@ div.container-fluid.xyz(ng-if="menuCrude.indexOf('e')>=0", ng-controller="Depart
               a.btn.btn-small.btn-warning(ng-click="newDepartment()", data-toggle="modal", title=titleNewDepartment, data-target="#departmentModal", ng-if="menuCrude.indexOf('c')>=0")
                 span.fa.fa-plus
             th.print-hide(style="width:50px; min-width: 50px; max-width: 50px;")
-              a.btn.btn-small.btn-primary(ng-click="deleteSelectedThirdparties()", title=titleDeleteSelected, ng-disabled="!anyIdsSelected", ng-if="menuCrude.indexOf('d')>=0")
+              a.btn.btn-small.btn-primary(ng-click="deleteSelectedDepartments()", title=titleDeleteSelected, ng-disabled="!anyIdsSelected", ng-if="menuCrude.indexOf('d')>=0")
                 span.fa.fa-trash
         tbody
-          tr(ng-repeat="department in filtered = (thirdparties | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit")
+          tr(ng-repeat="department in filtered = (departments | filter:search | orderBy : predicate :reverse) | startFrom:(currentPage-1)*entryLimit | limitTo:entryLimit")
             td.print-hide
               input(type="checkbox", ng-model="department.isChecked", ng-change="checkDepartment($index)", value="department.id")
             td.text-center
