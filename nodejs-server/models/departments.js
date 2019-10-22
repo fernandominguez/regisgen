@@ -75,13 +75,13 @@ Departments.delete = (id, req, res) => {
 
 Departments.findById = (id, req, res) => {
   return new Promise((resolve, reject) => {
-    Registry.validate({ id: id }, Departments.prototype.calls.findById, req, res)
+    Departments.validate({ id: id }, Departments.prototype.calls.findById, req, res)
       .then(() => {
         var sql = " SELECT * FROM ?? WHERE id = ? ";
         var values = [Departments.prototype.table, id];
         db.query(sql, values)
           .then(rows => {
-            return resolve(rows);
+            return resolve(rows[0]);
           })
           .catch(err => {
             return reject(err);
