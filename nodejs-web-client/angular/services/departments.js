@@ -8,7 +8,7 @@ services.factory("DepartmentsFactory", function ($resource) {
 
 services.factory("DepartmentFactory", function ($resource) {
   return {
-    departments: $resource("/department/:id/:data", {}, {
+    department: $resource("/department/:id/:data", {}, {
       create: { method: "POST", params: { data: "@data" } },
       read: { method: "GET", params: { id: "@id" } },
       update: { method: "PUT", params: { data: "@data" } },
