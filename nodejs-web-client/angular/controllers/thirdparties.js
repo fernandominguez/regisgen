@@ -17,7 +17,6 @@ app.controller("ThirdpartyListCtrl", ["$rootScope", "$scope", "ThirdpartiesFacto
       }
     );
     $scope.newThirdparty = function () {
-      alert("newThirdparty");
       $scope.thirdparty = {};
       $scope.isNew = true;
       $scope.isView = false;
