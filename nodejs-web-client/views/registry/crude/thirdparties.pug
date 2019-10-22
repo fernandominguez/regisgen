@@ -3,7 +3,7 @@ div.modal-content.panel.panel-danger
     div.panel-title
       span(ng-if="isNew")=msgNewThirdparty
       span(ng-if="!isNew")
-        | {{ thidparty.name }}
+        | {{ thirdparty.name }}
       a.close.btn.btn-small.btn-outline-primary(type="button", aria-label=btnClose, ng-click="closeModal('thirdpartyModal')", ng-if="fromModal")
         span(aria-hidden="true")
           | &times;
