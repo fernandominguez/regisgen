@@ -191,7 +191,7 @@ module.exports = function(app) {
         titleDeleteDepartment: lang.message("titleDeleteDepartment", req, res),
         titleDeleteSelected: lang.message("titleDeleteSelected", req, res),
         titleDepartmentsPerPage: lang.message(
-          "titleDepartmentsPerPage:",
+          "titleDepartmentsPerPage",
           req,
           res
         ),
