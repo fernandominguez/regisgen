@@ -75,7 +75,7 @@ Departments.delete = (id, req, res) => {
 
 Departments.findById = (id, req, res) => {
   return new Promise((resolve, reject) => {
-    Registry.validate({ id: id }, Registry.prototype.calls.findById, req, res)
+    Registry.validate({ id: id }, Departments.prototype.calls.findById, req, res)
       .then(() => {
         var sql = " SELECT * FROM ?? WHERE id = ? ";
         var values = [Departments.prototype.table, id];

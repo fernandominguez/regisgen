@@ -76,7 +76,7 @@ Thirdparties.delete = (id, req, res) => {
 
 Thirdparties.findById = (id, req, res) => {
   return new Promise((resolve, reject) => {
-    Thirdparties.validate(data, Registry.prototype.calls.findById, req, res)
+    Thirdparties.validate(data, Thirdparties.prototype.calls.findById, req, res)
       .then(() => {
         var sql = " SELECT * FROM ?? WHERE id = ? ";
         var values = [Thirdparties.prototype.table, id];
