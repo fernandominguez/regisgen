@@ -54,10 +54,8 @@ div.container-fluid.xyz(ng-if="menuCrude.indexOf('e')>=0", ng-controller="Thirdp
               | {{ thirdparty.phone }}
             td.text-center
               | {{ thirdparty.email }}
-            td
-              | {{ thirdparty.identifier }}
             td.text-center
-              | {{ thirdparty.isAffiliated }}
+              | {{ thirdparty.identifier }}
             td.print-hide
               a.btn.btn-small.btn-success(ng-click="viewThirdparty(thirdparty.id)", data-toggle="modal", title=titleShowData, data-target="#thirdpartyModal", ng-if="menuCrude.indexOf('r')>=0")
                 span.fa.fa-share-alt
