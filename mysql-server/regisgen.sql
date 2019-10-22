@@ -38,6 +38,10 @@ INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang
 INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'user-menu', 'user-circle', '#!', 100, 'es');
 INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'Registry Book', 'inbox', '#!/registry', 200, 'en');
 INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'Libro de Registro', 'inbox', '#!/registry', 200, 'es');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'Thirdparties', 'users', '#!/registry/thirdparties', 210, 'en');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'Terceros', 'users', '#!/registry/thirdparties', 210, 'es');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'Departments', 'building', '#!/registry/departments', 220, 'en');
+INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'Departamentos', 'building', '#!/registry/departments', 220, 'es');
 INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'Configuration', 'cog', '#!', 300, 'en');
 INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (0, 'Configuración', 'cog', '#!', 300, 'es');
 INSERT INTO `regisgen`.`menus` (`parent`, `name`, `icon`, `href`, `order`, `lang`) VALUES (5, 'Users', 'users', '#!/config/users', 310, 'en');
@@ -83,6 +87,10 @@ INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`)
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 12, 'crude');
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 13, 'crude');
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 14, 'crude');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 15, 'crude');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 16, 'crude');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 17, 'crude');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (1, 18, 'crude');
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 1, 'crude');
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 2, 'crude');
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 3, 'crude');
@@ -97,6 +105,10 @@ INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`)
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 12, 'crude');
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 13, 'crude');
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 14, 'crude');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 15, 'crude');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 16, 'crude');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 17, 'crude');
+INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (2, 18, 'crude');
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (3, 1, 'cre');
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (3, 2, 'cre');
 INSERT INTO `regisgen`.`permissions-menus` (`id-permission`, `id-menu`, `crude`) VALUES (3, 3, 'cre');
