@@ -76,13 +76,13 @@ Thirdparties.delete = (id, req, res) => {
 
 Thirdparties.findById = (id, req, res) => {
   return new Promise((resolve, reject) => {
-    Thirdparties.validate(data, Thirdparties.prototype.calls.findById, req, res)
+    Thirdparties.validate({ id: id }, Thirdparties.prototype.calls.findById, req, res)
       .then(() => {
         var sql = " SELECT * FROM ?? WHERE id = ? ";
         var values = [Thirdparties.prototype.table, id];
         db.query(sql, values)
           .then(rows => {
-            return resolve(rows);
+            return resolve(rows[0]);
           })
           .catch(err => {
             return reject(err);
