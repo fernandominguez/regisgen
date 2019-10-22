@@ -30,7 +30,7 @@ div.container-fluid.xyz(ng-if="menuCrude.indexOf('e')>=0", ng-controller="Depart
             th(style="min-width: 150px;", ng-click="sort_by('address')", title=titleClickToShortByThisColumn)=thAddress
             th.text-center(style="min-width: 150px;", ng-click="sort_by('phone')", title=titleClickToShortByThisColumn)=thPhone
             th.text-center(style="min-width: 150px;", ng-click="sort_by('email')", title=titleClickToShortByThisColumn)=thEmail
-            th.text-center(style="width:50px; min-width: 50px; max-width: 50px;", ng-click="sort_by('office')", title=titleClickToShortByThisColumn)=thOffice
+            th.text-center(style="width:70px; min-width: 70px; max-width: 70px;", ng-click="sort_by('office')", title=titleClickToShortByThisColumn)=thOffice
             th.print-hide(style="width:50px; min-width: 50px; max-width: 50px;")
               a.btn.btn-small.btn-success(print-div=".printable", print-div-type="list", print-div-title=titlePrintDivDepartments, title=titlePrintList, ng-disabled="filteredItems == 0")
                 span.fa.fa-print
