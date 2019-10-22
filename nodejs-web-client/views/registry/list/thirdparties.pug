@@ -30,7 +30,7 @@ div.container-fluid.xyz(ng-if="menuCrude.indexOf('e')>=0", ng-controller="Thirdp
             th(style="min-width: 150px;", ng-click="sort_by('address')", title=titleClickToShortByThisColumn)=thAddress
             th.text-center(style="min-width: 150px;", ng-click="sort_by('phone')", title=titleClickToShortByThisColumn)=thPhone
             th.text-center(style="min-width: 150px;", ng-click="sort_by('email')", title=titleClickToShortByThisColumn)=thEmail
-            th.text-center(style="width:80px; min-width: 80px; max-width: 80px;", ng-click="sort_by('identifier')", title=titleClickToShortByThisColumn)=thIdentification
+            th.text-center(style="width:150px; min-width: 150px; max-width: 150px;", ng-click="sort_by('identifier')", title=titleClickToShortByThisColumn)=thIdentification
             th.print-hide(style="width:50px; min-width: 50px; max-width: 50px;")
               a.btn.btn-small.btn-success(print-div=".printable", print-div-type="list", print-div-title=titlePrintDivThirdparties, title=titlePrintList, ng-disabled="filteredItems == 0")
                 span.fa.fa-print
