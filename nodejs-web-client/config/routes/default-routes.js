@@ -265,7 +265,7 @@ module.exports = function(app) {
         ),
         titleShowData: lang.message("titleShowData", req, res),
         titleThirdpartiesPerPage: lang.message(
-          "titleThirdpartiesPerPage:",
+          "titleThirdpartiesPerPage",
           req,
           res
         )
