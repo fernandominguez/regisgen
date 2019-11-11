@@ -37,7 +37,7 @@ module.exports = app => {
 
   app.put("/api/department", auth.authenticate, (req, res) => {
     departments
-      .update(JSON.parse(req.body.data.data), req, res)
+      .update(req.body.data.data, req, res)
       .then(rows => {
         res.status(200).json(rows);
       })
