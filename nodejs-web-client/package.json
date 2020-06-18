@@ -34,7 +34,7 @@
     "passport-local-roles": "1.0.1",
     "pug": "^2.0.4",
     "@bradchesney79/ui-bootstrap-tpls": "1.3.5",
-    "angular": "1.7.8",
+    "angular": "1.8.0",
     "angular-messages": "1.7.8",
     "angular-resource": "1.7.8",
     "angular-route": "1.7.8",
